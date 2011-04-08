@@ -1,0 +1,9 @@
+# Yii temporary folders
+assets/
+protected/runtime/
+themes/classic/views/
+
+# Eclipse project files
+.buildpath
+.project
+.settings/
