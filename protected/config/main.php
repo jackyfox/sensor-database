@@ -54,7 +54,7 @@ return array(
 		// uncomment the following to use a MySQL database
 		*/
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=sensordb',
+			'connectionString' => 'mysql:host=localhost;dbname=SensorDB',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',

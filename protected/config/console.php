@@ -4,7 +4,7 @@
 // Any writable CConsoleApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Console Application',
+	'name'=>'Sensor database',
 	// application components
 	'components'=>array(
 		/*
@@ -15,7 +15,7 @@ return array(
 		
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=sensordb',
+			'connectionString' => 'mysql:host=localhost;dbname=SensorDB',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
