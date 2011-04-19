@@ -45,11 +45,11 @@ class User extends CActiveRecord
 			array('password', 'compare'),
 			array('password_repeat', 'safe'),
 			array('username', 'unique'),
-			array('username, password', 'length', 'max'=>256),
+			array('username, password, fullname', 'length', 'max'=>256),
 			array('last_login_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, last_login_time', 'safe', 'on'=>'search'),
+			array('id, username, password, fullname, last_login_time', 'safe', 'on'=>'search'),
 		);
 	}
 
