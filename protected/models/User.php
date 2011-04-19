@@ -15,6 +15,7 @@
  */
 class User extends CActiveRecord
 {
+	public $password_repeat;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -41,11 +42,14 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password', 'required'),
-			array('username, password, fullname', 'length', 'max'=>256),
+			array('password', 'compare'),
+			array('password_repeat', 'safe'),
+			array('username', 'unique'),
+			array('username, password', 'length', 'max'=>256),
 			array('last_login_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, fullname, last_login_time', 'safe', 'on'=>'search'),
+			array('id, username, password, last_login_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,10 +72,10 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'username' => 'Username',
-			'password' => 'Password',
-			'fullname' => 'Fullname',
-			'last_login_time' => 'Last Login Time',
+			'username' => 'Пользователь',
+			'password' => 'Пароль',
+			'password_repeat' => 'Подтверждение пароля',
+			'last_login_time' => 'Последний визит',
 		);
 	}
 
@@ -95,5 +99,18 @@ class User extends CActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 * perform one-way encryption on the password before we store it in the database
+	 */
+	protected function afterValidate()
+	{
+		parent::afterValidate();
+		$this->password = $this->encrypt($this->password);
+	}
+	public function encrypt($value)
+	{
+		return md5($value);
 	}
 }

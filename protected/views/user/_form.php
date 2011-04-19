@@ -22,15 +22,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'fullname'); ?>
-		<?php echo $form->textField($model,'fullname',array('size'=>60,'maxlength'=>256)); ?>
-		<?php echo $form->error($model,'fullname'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'last_login_time'); ?>
-		<?php echo $form->textField($model,'last_login_time'); ?>
-		<?php echo $form->error($model,'last_login_time'); ?>
+		<?php echo $form->label($model,'password_repeat'); ?>
+		<?php echo $form->passwordField($model,'password_repeat',array('size'=>60,'maxlength'=>256)); ?>
+		<?php echo $form->error($model,'password_repeat'); ?>
 	</div>
 
 	<div class="row buttons">

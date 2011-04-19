@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'База газосигнализаторов СПб ИТЭ',
+	'language' => 'ru',
 	'charset' => 'UTF-8',
 
 	// preloading 'log' component
