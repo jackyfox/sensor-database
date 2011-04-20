@@ -14,7 +14,16 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		'factory_number',
+		array(
+			'class'=>'CLinkColumn',
+			'header'=>'Зав. №',
+			'labelExpression'=>'$data->factory_number',
+			'urlExpression'=>'Yii::app()->createUrl("gasAlarm/view",array("id"=>$data->id))'
+		),
+		array(
+			'name'  => 'gas_type_id',
+			'value' => '$data->gasType->type',
+		),
 		array(
 			'name'  => 'organization',
 			'value' => '$data->organization->name',

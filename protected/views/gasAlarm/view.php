@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View GasAlarm #<?php echo $model->id; ?></h1>
+<h1>View GasAlarm <?php echo $model->factory_number; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -35,3 +35,12 @@ $this->menu=array(
 		'organization_id',
 	),
 )); ?>
+
+<h2>Опробования</h3>
+<?php if ($model->testCount == 0): ?>
+<h3>Ни одного оробования данного датчика не проводилось</h3>
+<?php else: ?>
+	<?php $this->renderPartial('_tests', array(
+		'tests' => $model->tests,
+	)); ?>
+<?php endif; ?>

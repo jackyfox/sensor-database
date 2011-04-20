@@ -87,6 +87,9 @@ class GasAlarm extends CActiveRecord
 			'supplyVoltage' => array(self::BELONGS_TO, 'SupplyVoltage', 'supply_voltage_id'),
 			'maintenances' => array(self::HAS_MANY, 'Maintenance', 'gas_alarm_id'),
 			'tests' => array(self::HAS_MANY, 'Test', 'gas_alarm_id'),
+			'testCount' => array(self::STAT, 'Test', 'gas_alarm_id'),
+			'checkCount' => array(self::STAT, 'Check', 'gas_alarm_id'),
+			'calibrationCount' => array(self::STAT, 'Calibration', 'gas_alarm_id'),
 		);
 	}
 
