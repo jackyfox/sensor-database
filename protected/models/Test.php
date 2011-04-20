@@ -10,7 +10,7 @@
  * @property double $humidity
  * @property double $pgs1
  * @property double $pgs1_voltage
- * @property double $psk1_indication
+ * @property double $pgs1_indication
  * @property double $pgs2
  * @property double $pgs2_voltage
  * @property double $pgs2_indication
@@ -51,11 +51,11 @@ class Test extends CActiveRecord
 		return array(
 			array('gas_alarm_id', 'required'),
 			array('gas_alarm_id', 'numerical', 'integerOnly'=>true),
-			array('temperature, humidity, pgs1, pgs1_voltage, psk1_indication, pgs2, pgs2_voltage, pgs2_indication, pgs3, pgs3_voltage, pgs3_indication', 'numerical'),
+			array('temperature, humidity, pgs1, pgs1_voltage, pgs1_indication, pgs2, pgs2_voltage, pgs2_indication, pgs3, pgs3_voltage, pgs3_indication', 'numerical'),
 			array('date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, date, temperature, humidity, pgs1, pgs1_voltage, psk1_indication, pgs2, pgs2_voltage, pgs2_indication, pgs3, pgs3_voltage, pgs3_indication, gas_alarm_id', 'safe', 'on'=>'search'),
+			array('id, date, temperature, humidity, pgs1, pgs1_voltage, pgs1_indication, pgs2, pgs2_voltage, pgs2_indication, pgs3, pgs3_voltage, pgs3_indication, gas_alarm_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,7 +83,7 @@ class Test extends CActiveRecord
 			'humidity' => 'Humidity',
 			'pgs1' => 'Pgs1',
 			'pgs1_voltage' => 'Pgs1 Voltage',
-			'psk1_indication' => 'Psk1 Indication',
+			'pgs1_indication' => 'Pgs1 Indication',
 			'pgs2' => 'Pgs2',
 			'pgs2_voltage' => 'Pgs2 Voltage',
 			'pgs2_indication' => 'Pgs2 Indication',
@@ -111,7 +111,7 @@ class Test extends CActiveRecord
 		$criteria->compare('humidity',$this->humidity);
 		$criteria->compare('pgs1',$this->pgs1);
 		$criteria->compare('pgs1_voltage',$this->pgs1_voltage);
-		$criteria->compare('psk1_indication',$this->psk1_indication);
+		$criteria->compare('pgs1_indication',$this->pgs1_indication);
 		$criteria->compare('pgs2',$this->pgs2);
 		$criteria->compare('pgs2_voltage',$this->pgs2_voltage);
 		$criteria->compare('pgs2_indication',$this->pgs2_indication);

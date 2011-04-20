@@ -49,7 +49,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'pgs1',
 		'pgs1_voltage',
 		/*
-		'psk1_indication',
+		'pgs1_indication',
 		'pgs2',
 		'pgs2_voltage',
 		'pgs2_indication',

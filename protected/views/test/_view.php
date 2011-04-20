@@ -24,8 +24,8 @@
 	<?php echo CHtml::encode($data->pgs1_voltage); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('psk1_indication')); ?>:</b>
-	<?php echo CHtml::encode($data->psk1_indication); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('pgs1_indication')); ?>:</b>
+	<?php echo CHtml::encode($data->pgs1_indication); ?>
 	<br />
 
 	<?php /*

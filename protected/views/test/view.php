@@ -24,7 +24,7 @@ $this->menu=array(
 		'humidity',
 		'pgs1',
 		'pgs1_voltage',
-		'psk1_indication',
+		'pgs1_indication',
 		'pgs2',
 		'pgs2_voltage',
 		'pgs2_indication',

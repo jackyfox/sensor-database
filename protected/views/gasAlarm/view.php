@@ -36,11 +36,13 @@ $this->menu=array(
 	),
 )); ?>
 
-<h2>Опробования</h3>
+<h2>Опробования</h2>
 <?php if ($model->testCount == 0): ?>
 <h3>Ни одного оробования данного датчика не проводилось</h3>
 <?php else: ?>
 	<?php $this->renderPartial('_tests', array(
 		'tests' => $model->tests,
 	)); ?>
+	<?php if ($model->testCount > 1):?>
+	<?php endif;?>
 <?php endif; ?>

@@ -40,9 +40,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'psk1_indication'); ?>
-		<?php echo $form->textField($model,'psk1_indication'); ?>
-		<?php echo $form->error($model,'psk1_indication'); ?>
+		<?php echo $form->labelEx($model,'pgs1_indication'); ?>
+		<?php echo $form->textField($model,'pgs1_indication'); ?>
+		<?php echo $form->error($model,'pgs1_indication'); ?>
 	</div>
 
 	<div class="row">

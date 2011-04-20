@@ -36,8 +36,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'psk1_indication'); ?>
-		<?php echo $form->textField($model,'psk1_indication'); ?>
+		<?php echo $form->label($model,'pgs1_indication'); ?>
+		<?php echo $form->textField($model,'pgs1_indication'); ?>
 	</div>
 
 	<div class="row">
