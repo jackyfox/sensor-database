@@ -31,12 +31,16 @@
 			'yAxis' => array(
 				'title' => array('text' => 'Напряжение, В')
 			),
+			'tooltip' => array(
+				'formatter' => 'js:function(){ return this.series.name+"<br><strong>"+this.y+"</strong> B<br>"+this.x; }',
+			),
 			'series' => array(
 				array('name' => 'ПГС 1', 'data' => $v1),
 				array('name' => 'ПГС 2', 'data' => $v2),
 				array('name' => 'ПГС 3', 'data' => $v3),
-			)
-		)
+			),
+			'credits' => array('enabled' => false),
+		),
 	)); 
 ?>
 </div>
