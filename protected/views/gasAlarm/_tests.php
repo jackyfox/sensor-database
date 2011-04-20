@@ -17,3 +17,26 @@
 	<div class="humi">Влажность: <?php echo $test->humidity; ?></div>
 </div><!-- test --><br />
 <?php endforeach; ?>
+<div class="chart">
+<?php
+	$this->Widget('ext.highcharts.HighchartsWidget', array(
+		'options'=>array(
+			'chart' => array(
+				'defaultSeriesType' => 'line',
+			),
+			'title' => array('text' => 'Изменение напряжения на сенсоре'),
+			'xAxis' => array(
+				'categories' => $dates
+			),
+			'yAxis' => array(
+				'title' => array('text' => 'Напряжение, В')
+			),
+			'series' => array(
+				array('name' => 'ПГС 1', 'data' => $v1),
+				array('name' => 'ПГС 2', 'data' => $v2),
+				array('name' => 'ПГС 3', 'data' => $v3),
+			)
+		)
+	)); 
+?>
+</div>

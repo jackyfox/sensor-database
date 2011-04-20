@@ -43,6 +43,4 @@ $this->menu=array(
 	<?php $this->renderPartial('_tests', array(
 		'tests' => $model->tests,
 	)); ?>
-	<?php if ($model->testCount > 1):?>
-	<?php endif;?>
 <?php endif; ?>
