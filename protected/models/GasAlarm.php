@@ -148,4 +148,97 @@ class GasAlarm extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	 * IDs of gas alarm types
+	 * Enter description here ...
+	 * @var integer
+	 */
+	const GST_SEMICOND = 1;
+	const GST_TERMOCAT = 2;
+	const GST_ELECTHIM = 3;
+	
+	/**
+	 * @return array gas sensor types indexed by type IDs
+	 */
+	public function getGasSensorType()
+	{
+		return array(
+			self::GST_SEMICOND => 'П',
+			self::GST_TERMOCAT => 'К',
+			self::GST_ELECTHIM => 'Э',
+		);
+	}
+	
+	/**
+	 * @return gas sensor type by index
+	 */
+	public function getGasSensorTypeText()
+	{
+		$types = $this->getGasSensorType();
+		return isset($types[$this->gas_sensor_type_id]) ? 
+			$types[$this->gas_sensor_type_id] : 
+			"unknown type ({$this->gas_sensor_type_id})";
+	}
+	
+	/**
+	 * @return array gas sensor types description indexed by type IDs
+	 */
+	public function getGasSensorTypeDesc()
+	{
+		return array(
+			self::GST_SEMICOND => 'полупроводниковый',
+			self::GST_TERMOCAT => 'термокаталитический',
+			self::GST_ELECTHIM => 'электрохимический',
+		);
+	}
+	
+	/**
+	 * @return gas sensor type description text
+	 */
+	public function getGasSensorTypeDescText()
+	{
+		$descs = $this->getGasSensorTypeDesc();
+		return isset($descs[$this->gas_sensor_type_id]) ? 
+			$descs[$this->gas_sensor_type_id] : 
+			"unknown type ({$this->gas_sensor_type_id})";
+	}
+	
+	/**
+	 * Returns code name of gas alarm like "СГИТЭ-СО-3.1-24"
+	 * @return string with code name of gas alarm
+	 */
+	public function getCodeName()
+	{
+		$code_name = $this->gasAlarmType->type."-";
+		$code_name .= $this->gasType->type."-";
+		$code_name .= $this->controlSignalsMethod->type;
+		if ($this->gasAlarmType->type === "СГИТЭ")
+			$code_name .= ".";
+		else 
+			$code_name .= "-";
+		$code_name .= $this->buzzer."-";
+		$code_name .= $this->supplyVoltage->voltage;
+		
+		if ($this->gasAlarmType->type === "СГИТЭ")
+		{
+			if ($this->explosion_safety == 1)
+				$code_name .= "-1ExibIIAT4";
+		}
+		else 
+		{
+			$code_name .= "-".$this->getGasSensorTypeText();
+			if ($this->temp_sensor == 1 || $this->lcd == 1)
+			{
+				$code_name .= ($this->temp_sensor == 1) ? "Т" : "";
+				$code_name .= ($this->lcd == 1) ? "И" : "";
+				$code_name .= "-";
+			}			
+			else 
+				$code_name .= "О-";
+			$code_name .= ($this->protection_corps == 1) ? "53" : "20";
+		}
+		
+		return $code_name;
+	}
 }

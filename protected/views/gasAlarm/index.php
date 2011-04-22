@@ -16,12 +16,18 @@ $this->menu=array(
 	'columns'=>array(
 		array(
 			'class'=>'CLinkColumn',
-			'header'=>'Зав. №',
-			'labelExpression'=>'$data->factory_number',
+			'header'=>'Наименование',
+			'labelExpression'=>'$data->codeName',
 			'urlExpression'=>'Yii::app()->createUrl("gasAlarm/view",array("id"=>$data->id))'
 		),
 		array(
+			'name'  => 'factory_number',
+			'header'=> 'Зав .№',
+			'value' => '$data->factory_number',
+		),
+		array(
 			'name'  => 'gas_type_id',
+			'header'=> 'Газ',
 			'value' => '$data->gasType->type',
 		),
 		array(

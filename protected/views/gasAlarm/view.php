@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View GasAlarm <?php echo $model->factory_number; ?></h1>
+<h1>View GasAlarm <?php echo $model->codeName; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
