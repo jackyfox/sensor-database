@@ -10,7 +10,16 @@
 	$i2 = array();
 	$i3 = array();
 ?>
-<div class="tests">
+<?php if ($tests[0]->gasAlarm->testCount > 1): ?>
+<button id="toggle_tests" style="float: right;">Опробования в табличной форме &darr;</button>
+<?php Yii::app()->clientScript->registerScript('helloscript',"
+        $('#toggle_tests').click(function () {
+		$('#tests_table').toggle('fast');
+		});
+    ",CClientScript::POS_READY);
+?>
+<?php endif; ?>
+<div id="tests_table" <?php if($tests[0]->gasAlarm->testCount > 1) echo 'style="display: none;"'; ?>>
 <table>
 <tr>
 <th>Дата</th><th>Темп., &deg;С</th><th>Влажность</th>
@@ -51,8 +60,9 @@
 </tr>
 <?php endforeach; ?>
 </table>
-</div><!-- tests -->
-<div class="chart">
+</div><!-- tests_table -->
+<?php if ($tests[0]->gasAlarm->testCount > 1):?>
+<div class="tests_chart">
 <?php
 	$this->Widget('ext.highcharts.HighchartsWidget', array(
 		'options'=>array(
@@ -87,4 +97,5 @@
 		),
 	)); 
 ?>
-</div> 
+</div><!-- "tests_chart" -->
+<?php endif; ?> 
