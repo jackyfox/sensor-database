@@ -1,38 +1,30 @@
 <?php
 $this->breadcrumbs=array(
-	'Gas Alarms'=>array('index'),
-	$model->id,
+	'Газосигнализаторы'=>array('index'),
+	$model->codeName.', '.$model->factory_number,
 );
 
 $this->menu=array(
-	array('label'=>'List GasAlarm', 'url'=>array('index')),
-	array('label'=>'Create GasAlarm', 'url'=>array('create')),
-	array('label'=>'Update GasAlarm', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete GasAlarm', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage GasAlarm', 'url'=>array('admin')),
+	array('label'=>'Список', 'url'=>array('index')),
+	array('label'=>'Добавить', 'url'=>array('create')),
+	array('label'=>'Изменить', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View GasAlarm <?php echo $model->codeName; ?></h1>
+<h1>Подробно о <?php echo $model->codeName; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'factory_number',
-		'manufacture_date',
-		'buzzer',
-		'temp_sensor',
-		'explosion_safety',
-		'protection_corps',
-		'lcd',
-		'location_id',
-		'gas_alarm_type_id',
-		'gas_type_id',
-		'control_signals_method_id',
-		'supply_voltage_id',
-		'gas_sensor_type_id',
-		'organization_id',
+		array(
+			'name' => 'manufacture_date',
+			'value'=> date("d.m.Y", strtotime($model->manufacture_date)),
+		),
+		'organization.name',
+		'location.address',
 	),
 )); ?>
 
