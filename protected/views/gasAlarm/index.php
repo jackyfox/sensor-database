@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Gas Alarms',
+	'Газосигнализаторы',
 );
 
 $this->menu=array(
-	array('label'=>'Create GasAlarm', 'url'=>array('create')),
-	array('label'=>'Manage GasAlarm', 'url'=>array('admin')),
+	array('label'=>'Добавить', 'url'=>array('create')),
+	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Gas Alarms</h1>
+<h1>Газосигнализаторы</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$dataProvider,
