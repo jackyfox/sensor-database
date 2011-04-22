@@ -45,8 +45,8 @@
 	<?php echo $content; ?>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
+		&copy; 2010-<?php echo date('Y'); ?> Санкт-Петербургский институт теплоэнергетики<br/>
+		Все права защищены.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
