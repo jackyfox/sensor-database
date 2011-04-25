@@ -30,9 +30,18 @@ $this->menu=array(
 
 <h2>Опробования</h2>
 <?php if ($model->testCount == 0): ?>
-<h3>Ни одного оробования данного датчика не проводилось</h3>
+<h4>Ни одного оробования данного датчика не проводилось</h4>
 <?php else: ?>
 	<?php $this->renderPartial('_tests', array(
 		'tests' => $model->tests,
+	)); ?>
+<?php endif; ?>
+
+<h2>Калибровки</h2>
+<?php if ($model->calibrationCount == 0): ?>
+<h4>Данных о калибровке данного датчика нет</h4>
+<?php else: ?>
+	<?php $this->renderPartial('_calibrations', array(
+		'calibrations' => $model->calibrations,
 	)); ?>
 <?php endif; ?>
