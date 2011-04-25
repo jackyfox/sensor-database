@@ -42,7 +42,9 @@
 	
 ?>
 <tr>
-<td><?php echo date("d.m.Y", strtotime($test->date)); ?></td>
+<td><?php echo CHtml::link(date("d.m.Y", strtotime($test->date)), 
+	array('test/view',
+    'id'=>$test->id)); ?></td>
 <td><?php echo $test->temperature; ?></td>
 <td><?php echo $test->humidity; ?></td>
 
