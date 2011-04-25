@@ -45,3 +45,12 @@ $this->menu=array(
 		'calibrations' => $model->calibrations,
 	)); ?>
 <?php endif; ?>
+
+<h2>Сервисное обслуживание</h2>
+<?php if ($model->maintenanceCount == 0): ?>
+<h4>Сервисные обслуживания не проводились для данного датчика</h4>
+<?php else: ?>
+	<?php $this->renderPartial('_maintenances', array(
+		'maintenances' => $model->maintenances,
+	)); ?>
+<?php endif; ?>
