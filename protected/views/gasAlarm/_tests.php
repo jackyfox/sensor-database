@@ -19,7 +19,7 @@
     ",CClientScript::POS_READY);
 ?>
 <?php endif; ?>
-<div id="tests_table" <?php if($tests[0]->gasAlarm->testCount > 1) echo 'style="display: none;"'; ?>>
+<div id="tests_table" <?php if($tests[0]->gasAlarm->testCount > 1) echo 'style="display: none;"'; ?> class="detail_table">
 <table>
 <tr>
 <th>Дата</th><th>Темп., &deg;С</th><th>Влажность</th>

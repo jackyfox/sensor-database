@@ -1,4 +1,4 @@
-<div id="calibrations_table">
+<div id="calibrations_table" class="detail_table">
 <table>
 <tr>
 <th>Дата</th><th>Темп., &deg;С</th><th>Влажность</th>

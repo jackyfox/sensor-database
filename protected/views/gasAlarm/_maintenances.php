@@ -1,4 +1,4 @@
-<div id="maintenances_table">
+<div id="maintenances_table" class="detail_table">
 <table>
 <tr>
 <th>Дата</th><th>Вид работ</th><th>Заметки</th>

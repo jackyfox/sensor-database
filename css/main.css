@@ -227,3 +227,18 @@ div.search-form
 {
 	background: #80CFFF;
 }
+
+/* styles for GasAlarm view page */
+
+div.detail_table table th 
+{
+	color: white;
+	background: url("bg.gif") repeat-x scroll left top gray;
+	text-align: center;
+	border-right: 1px solid white;
+}
+
+div.detail_table table td
+{
+    border-bottom: 1px solid gray;	
+}
