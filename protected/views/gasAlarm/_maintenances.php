@@ -9,7 +9,7 @@
 	array('maintenance/view',
     'id'=>$maintenance->id)); ?></td>
 <td><?php echo $maintenance->maintenanceType->type; ?></td>
-<td><?php echo $maintenance->note; ?></td>
+<td><?php echo CHtml::encode($maintenance->note); ?></td>
 
 </tr>
 <?php endforeach; ?>
