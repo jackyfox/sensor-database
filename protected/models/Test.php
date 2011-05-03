@@ -78,19 +78,19 @@ class Test extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'temperature' => 'Temperature',
-			'humidity' => 'Humidity',
-			'pgs1' => 'Pgs1',
-			'pgs1_voltage' => 'Pgs1 Voltage',
-			'pgs1_indication' => 'Pgs1 Indication',
-			'pgs2' => 'Pgs2',
-			'pgs2_voltage' => 'Pgs2 Voltage',
-			'pgs2_indication' => 'Pgs2 Indication',
-			'pgs3' => 'Pgs3',
-			'pgs3_voltage' => 'Pgs3 Voltage',
-			'pgs3_indication' => 'Pgs3 Indication',
-			'gas_alarm_id' => 'Gas Alarm',
+			'date' => 'Дата',
+			'temperature' => 'Температура',
+			'humidity' => 'Влажность',
+			'pgs1' => 'ПГС1',
+			'pgs1_voltage' => 'ПГС1 напряжение',
+			'pgs1_indication' => 'ПГС1 показание',
+			'pgs2' => 'ПГС2',
+			'pgs2_voltage' => 'ПГС2 напряжение',
+			'pgs2_indication' => 'ПГС2 показание',
+			'pgs3' => 'ПГС3',
+			'pgs3_voltage' => 'ПГС3 напряжение',
+			'pgs3_indication' => 'ПГС3 показание',
+			'gas_alarm_id' => 'Газосигнализатор',
 		);
 	}
 

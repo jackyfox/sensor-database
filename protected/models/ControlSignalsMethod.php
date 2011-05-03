@@ -38,7 +38,7 @@ class ControlSignalsMethod extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type', 'length', 'max'=>10),
+			array('type', 'numerical', 'integerOnly'=>true),
 			array('desc', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

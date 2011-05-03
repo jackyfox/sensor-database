@@ -66,9 +66,9 @@ class Check extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'check_result_id' => 'Check Result',
-			'gas_alarm_id' => 'Gas Alarm',
+			'date' => 'Дата',
+			'check_result_id' => 'Результат поверки',
+			'gas_alarm_id' => 'Газосигнализатор',
 		);
 	}
 

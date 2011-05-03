@@ -60,6 +60,7 @@ class GasAlarm extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('factory_number, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, organization_id', 'required'),
+			array('gas_sensor_type_id', 'in', 'range'=>array(1,2,3)),
 			array('buzzer, temp_sensor, explosion_safety, protection_corps, lcd, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, gas_sensor_type_id, organization_id', 'numerical', 'integerOnly'=>true),
 			array('factory_number', 'length', 'max'=>10),
 			array('manufacture_date', 'safe'),

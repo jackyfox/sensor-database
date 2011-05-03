@@ -70,10 +70,10 @@ class Maintenance extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'note' => 'Note',
-			'maintenance_type_id' => 'Maintenance Type',
-			'gas_alarm_id' => 'Gas Alarm',
+			'date' => 'Дата',
+			'note' => 'Заметки',
+			'maintenance_type_id' => 'Вид работ',
+			'gas_alarm_id' => 'Газосигнализатор',
 		);
 	}
 

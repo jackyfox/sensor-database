@@ -74,16 +74,16 @@ class Calibration extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'temperature' => 'Temperature',
-			'humidity' => 'Humidity',
-			'pgs1' => 'Pgs1',
-			'pgs1_voltage' => 'Pgs1 Voltage',
-			'pgs2' => 'Pgs2',
-			'pgs2_voltage' => 'Pgs2 Voltage',
-			'pgs3' => 'Pgs3',
-			'pgs3_voltage' => 'Pgs3 Voltage',
-			'gas_alarm_id' => 'Gas Alarm',
+			'date' => 'Дата',
+			'temperature' => 'Температура',
+			'humidity' => 'Влажность',
+			'pgs1' => 'ПГС1',
+			'pgs1_voltage' => 'ПГС1 напряжение',
+			'pgs2' => 'ПГС2',
+			'pgs2_voltage' => 'ПГС2 напряжение',
+			'pgs3' => 'ПГС3',
+			'pgs3_voltage' => 'ПГС3 напряжение',
+			'gas_alarm_id' => 'Газосигнализатор',
 		);
 	}
 

@@ -42,6 +42,7 @@ class Location extends CActiveRecord
 			array('organization_id', 'required'),
 			array('organization_id', 'numerical', 'integerOnly'=>true),
 			array('address', 'safe'),
+			array('address', 'unique'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, address, organization_id', 'safe', 'on'=>'search'),
@@ -68,8 +69,8 @@ class Location extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'address' => 'Address',
-			'organization_id' => 'Organization',
+			'address' => 'Адрес',
+			'organization_id' => 'Организация',
 		);
 	}
 

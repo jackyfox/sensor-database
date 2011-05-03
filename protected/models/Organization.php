@@ -40,6 +40,7 @@ class Organization extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, inn', 'safe'),
+			array('name, inn', 'unique'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, inn', 'safe', 'on'=>'search'),
@@ -66,8 +67,8 @@ class Organization extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'inn' => 'Inn',
+			'name' => 'Название',
+			'inn' => 'ИНН',
 		);
 	}
 

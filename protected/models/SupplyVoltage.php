@@ -63,7 +63,7 @@ class SupplyVoltage extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'voltage' => 'Voltage',
+			'voltage' => 'Напряжение',
 		);
 	}
 

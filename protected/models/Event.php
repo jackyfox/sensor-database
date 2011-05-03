@@ -67,9 +67,9 @@ class Event extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'msg' => 'Msg',
-			'date' => 'Date',
-			'user_id' => 'User',
+			'msg' => 'Событие',
+			'date' => 'Дата',
+			'user_id' => 'Пользователь',
 		);
 	}
 
