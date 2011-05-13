@@ -31,7 +31,7 @@ class GasAlarmController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','dloc'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -177,4 +177,20 @@ class GasAlarmController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	/**
+	 * Dynamic location loading
+	 */
+	public function actionDloc()
+	{
+	    $data=Location::model()->findAll('organization_id=:parent_id', 
+	                  array(':parent_id'=>(int) $_POST['GasAlarm']['organization_id']));
+	 
+	    $data=CHtml::listData($data,'id','address');
+	    foreach($data as $value=>$name)
+	    {
+	        echo CHtml::tag('option',
+	                   array('value'=>$value),CHtml::encode($name),true);
+    }
+}
 }

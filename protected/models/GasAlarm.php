@@ -105,7 +105,7 @@ class GasAlarm extends CActiveRecord
 			'factory_number' => 'Заводской номер',
 			'manufacture_date' => 'Дата изготовления',
 			'buzzer' => 'Звукоизвещатель',
-			'temp_sensor' => 'Температурный датчикr',
+			'temp_sensor' => 'Температурный датчик',
 			'explosion_safety' => 'Взрывозащита',
 			'protection_corps' => 'Защита корпуса',
 			'lcd' => 'ЖКИ',

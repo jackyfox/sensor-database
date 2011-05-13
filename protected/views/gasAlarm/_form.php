@@ -1,11 +1,17 @@
 <div class="form">
 
+<?php /*
+    Yii::app()->clientScript->registerScript('new_ga_form',"
+        alert('hello');
+    ",CClientScript::POS_READY); */
+?>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'gas-alarm-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Поля помеченные звездочкой <span class="required">*</span> обязательны.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -17,84 +23,117 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'manufacture_date'); ?>
-		<?php echo $form->textField($model,'manufacture_date'); ?>
+		
+		<?php
+		$form->widget('zii.widgets.jui.CJuiDatePicker', array(
+			'model'=>$model,
+			'attribute'=>'manufacture_date',
+			//'theme'=>'cupertino',
+			//'flat'=>true,
+			// additional javascript options for the date picker plugin
+			'options'=>array(
+				//'showAnim'=>'Slide',
+				//'dateFormat'=>'dd.mm.yy',
+				'showOtherMonths'=>true,
+				'selectOtherMonths'=>true,
+				'changeYear'=>true,
+				'changeMonth'=>true,
+				'showButtonPanel' => true,
+                'showOn' => 'both',
+				'buttonImageOnly'=>true,
+				//'buttonImage'=>Yii::app()->baseUrl."/images/calendar.png",
+			),
+			'language'=>'ru',
+			//'htmlOptions'=>array(
+			//	'style'=>'height:18px;'
+			//),
+		)); ?>
+		
 		<?php echo $form->error($model,'manufacture_date'); ?>
 	</div>
 
 	<div class="row">
+		<?php echo CHtml::activeCheckBox($model, 'buzzer'); ?>
 		<?php echo $form->labelEx($model,'buzzer'); ?>
-		<?php echo $form->textField($model,'buzzer'); ?>
 		<?php echo $form->error($model,'buzzer'); ?>
 	</div>
 
 	<div class="row">
+		<?php echo CHtml::activeCheckBox($model, 'temp_sensor'); ?>
 		<?php echo $form->labelEx($model,'temp_sensor'); ?>
-		<?php echo $form->textField($model,'temp_sensor'); ?>
 		<?php echo $form->error($model,'temp_sensor'); ?>
 	</div>
 
 	<div class="row">
+		<?php echo CHtml::activeCheckBox($model, 'explosion_safety'); ?>
 		<?php echo $form->labelEx($model,'explosion_safety'); ?>
-		<?php echo $form->textField($model,'explosion_safety'); ?>
 		<?php echo $form->error($model,'explosion_safety'); ?>
 	</div>
 
 	<div class="row">
+		<?php echo CHtml::activeCheckBox($model, 'protection_corps'); ?>
 		<?php echo $form->labelEx($model,'protection_corps'); ?>
-		<?php echo $form->textField($model,'protection_corps'); ?>
 		<?php echo $form->error($model,'protection_corps'); ?>
 	</div>
 
 	<div class="row">
+		<?php echo CHtml::activeCheckBox($model, 'lcd'); ?>
 		<?php echo $form->labelEx($model,'lcd'); ?>
-		<?php echo $form->textField($model,'lcd'); ?>
 		<?php echo $form->error($model,'lcd'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'location_id'); ?>
-		<?php echo $form->textField($model,'location_id'); ?>
-		<?php echo $form->error($model,'location_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'gas_alarm_type_id'); ?>
-		<?php echo $form->textField($model,'gas_alarm_type_id'); ?>
+		<?php echo $form->dropDownList($model, 'gas_alarm_type_id', CHtml::listData(GasAlarmType::model()->findAll(), 'id', 'type')); ?>
 		<?php echo $form->error($model,'gas_alarm_type_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'gas_type_id'); ?>
-		<?php echo $form->textField($model,'gas_type_id'); ?>
+		<?php echo $form->dropDownList($model, 'gas_type_id', CHtml::listData(GasType::model()->findAll(), 'id', 'type')); ?>
 		<?php echo $form->error($model,'gas_type_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'control_signals_method_id'); ?>
-		<?php echo $form->textField($model,'control_signals_method_id'); ?>
+		<?php echo $form->dropDownList($model, 'control_signals_method_id', CHtml::listData(ControlSignalsMethod::model()->findAll(), 'id', 'desc')); ?>
 		<?php echo $form->error($model,'control_signals_method_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'supply_voltage_id'); ?>
-		<?php echo $form->textField($model,'supply_voltage_id'); ?>
+		<?php echo $form->dropDownList($model, 'supply_voltage_id', CHtml::listData(SupplyVoltage::model()->findAll(), 'id', 'voltage')); ?>
 		<?php echo $form->error($model,'supply_voltage_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'gas_sensor_type_id'); ?>
-		<?php echo $form->textField($model,'gas_sensor_type_id'); ?>
+		<?php echo $form->dropDownList($model, 'gas_sensor_type_id', $model->getGasSensorTypeDesc()); ?>
 		<?php echo $form->error($model,'gas_sensor_type_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'organization_id'); ?>
-		<?php echo $form->textField($model,'organization_id'); ?>
+		<?php echo $form->dropDownList($model, 'organization_id', CHtml::listData(Organization::model()->findAll(), 'id', 'name'),	array(
+				'ajax' => array(
+					'type'=>'POST', //request type
+					'url'=>CController::createUrl('dloc'), //url to call.
+					//Style: CController::createUrl('currentController/methodToCall')
+					'update'=>'#'.CHtml::activeId($model, 'location_id'), //selector to update
+					//'data'=>'js:javascript statement' 
+					//leave out the data key to pass all form values through
+				))); ?>
 		<?php echo $form->error($model,'organization_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'location_id'); ?>
+		<?php echo $form->dropDownList($model, 'location_id', CHtml::listData(Location::model()->findAll(), 'id', 'address'), array('empty'=>'- сначала выберите организацию -')); ?>
+		<?php echo $form->error($model,'location_id'); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

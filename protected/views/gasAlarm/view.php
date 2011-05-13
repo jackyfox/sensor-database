@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'Список', 'url'=>array('index')),
 	array('label'=>'Добавить', 'url'=>array('create')),
 	array('label'=>'Изменить', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Точно удалить?')),
 	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
@@ -23,7 +23,12 @@ $this->menu=array(
 			'name' => 'manufacture_date',
 			'value'=> date("d.m.Y", strtotime($model->manufacture_date)),
 		),
-		'organization.name',
+		array(
+			'name' => 'organization.name',
+			'type' => 'raw',
+			'value'=> CHtml::link($model->organization->name, array('organization/view', 'id'=>$model->organization_id)),
+		),
+		
 		'location.address',
 	),
 )); ?>

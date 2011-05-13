@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Gas Alarms'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Газосигнализатор'=>array('index'),
+	$model->codeName.', '.$model->factory_number=>array('view','id'=>$model->id),
+	'Изменить',
 );
 
 $this->menu=array(
-	array('label'=>'List GasAlarm', 'url'=>array('index')),
-	array('label'=>'Create GasAlarm', 'url'=>array('create')),
-	array('label'=>'View GasAlarm', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage GasAlarm', 'url'=>array('admin')),
+	array('label'=>'Список', 'url'=>array('index')),
+	array('label'=>'Добавить', 'url'=>array('create')),
+	array('label'=>'Подробно', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update GasAlarm <?php echo $model->id; ?></h1>
+<h1>Изменить газосигнализатор <?php echo $model->codeName.', '.$model->factory_number; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
