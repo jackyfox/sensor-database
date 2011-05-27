@@ -163,3 +163,14 @@ input[type=radio] + label, input[type=checkbox] + label
 { 
 	display:inline !important; 
 }
+
+div.loading {
+    background-color: #eee;
+    background-image: url('images/loader.gif');
+    background-position:  center center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+div.loading * {
+    opacity: .8;
+}

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Газосигнализатор'=>array('index'),
+	'Газосигнализаторы'=>array('index'),
 	$model->codeName.', '.$model->factory_number=>array('view','id'=>$model->id),
 	'Изменить',
 );
