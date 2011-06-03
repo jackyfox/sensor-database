@@ -66,6 +66,8 @@ class GasAlarmController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$model->manufacture_date = date('d.m.Y', time());
+		
 		if(isset($_POST['GasAlarm']))
 		{
 			$model->attributes=$_POST['GasAlarm'];
@@ -90,6 +92,8 @@ class GasAlarmController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$model->manufacture_date = date('d.m.Y', strtotime($model->manufacture_date));
+		
 		if(isset($_POST['GasAlarm']))
 		{
 			$model->attributes=$_POST['GasAlarm'];

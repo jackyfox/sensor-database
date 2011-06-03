@@ -67,7 +67,7 @@ class Organization extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Название',
+			'name' => 'Название организации',
 			'inn' => 'ИНН',
 		);
 	}

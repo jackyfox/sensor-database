@@ -35,6 +35,18 @@
 class GasAlarm extends CActiveRecord
 {
 	/**
+	 * Корректируем дату для занесения в БД
+	 */
+	public function beforeSave()
+	{
+		/**
+		 * Преобразует строку вида «15.09.2011»  к формату БД «2011-09-15»
+		 */
+		$this->manufacture_date = date('Y-m-d', strtotime($this->manufacture_date));
+		
+		return parent::beforeSave();
+	}
+	/**
 	 * Returns the static model of the specified AR class.
 	 * @return GasAlarm the static model class
 	 */
