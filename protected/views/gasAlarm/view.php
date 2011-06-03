@@ -25,6 +25,7 @@ $this->menu=array(
 		),
 		array(
 			'name' => 'organization.name',
+			'label'=> 'Организация',
 			'type' => 'raw',
 			'value'=> CHtml::link($model->organization->name, array('organization/view', 'id'=>$model->organization_id)),
 		),

@@ -16,7 +16,7 @@
 	echo date('G:i', $last_login_time);
 ?>.
 <div>
-	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?></p>
+	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?></p>
 </div>
 <?php else: ?>
 <h1>Добро пожалость в базу газосигнализаторов</h1>
