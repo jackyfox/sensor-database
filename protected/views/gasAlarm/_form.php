@@ -16,6 +16,50 @@
     ',CClientScript::POS_READY);  
 ?>
 
+<?php
+	// Сокрытие свойств ГС типа СГИТЭм 
+    Yii::app()->clientScript->registerScript('sgiteM_hidding','
+		gas_type = $("#GasAlarm_gas_alarm_type_id option:selected").val();
+		if(gas_type == 1) 
+		{
+			// Скрываем тип чувствительного элемента,..
+			$("#GA_sensor_type").hide();
+			// ...степерь защиты корпуса,..
+			$("#GA_protection_corps").hide();
+			// ...датчик температуры,..
+			$("#GA_temp_sensor").hide();
+			// ...ЖКИ.
+			$("#GA_lcd").hide();
+		}
+		
+		$("#GasAlarm_gas_alarm_type_id").change(function() {
+			gas_type = $("#GasAlarm_gas_alarm_type_id option:selected").val();
+			if(gas_type == 1) 
+			{
+				// Скрываем тип чувствительного элемента,..
+				$("#GA_sensor_type").fadeOut();
+				// ...степерь защиты корпуса,..
+				$("#GA_protection_corps").fadeOut();
+				// ...датчик температуры,..
+				$("#GA_temp_sensor").fadeOut();
+				// ...ЖКИ.
+				$("#GA_lcd").fadeOut();
+			}
+			else
+			{
+				// Показываем тип чувствительного элемента,..
+				$("#GA_sensor_type").fadeIn();
+				// ...степерь защиты корпуса,..
+				$("#GA_protection_corps").fadeIn();
+				// ...датчик температуры,..
+				$("#GA_temp_sensor").fadeIn();
+				// ...ЖКИ.
+				$("#GA_lcd").fadeIn();
+			}
+		});
+    ',CClientScript::POS_READY);  
+?>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'gas-alarm-form',
 	'enableAjaxValidation'=>false,
@@ -82,24 +126,30 @@
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::activeCheckBox($model, 'temp_sensor'); ?>
-		<?php echo $form->labelEx($model,'temp_sensor'); ?>
-		<?php echo $form->error($model,'temp_sensor'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo CHtml::activeCheckBox($model, 'explosion_safety'); ?>
 		<?php echo $form->labelEx($model,'explosion_safety'); ?>
 		<?php echo $form->error($model,'explosion_safety'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" id="GA_sensor_type">
+		<?php echo $form->labelEx($model,'gas_sensor_type_id'); ?>
+		<?php echo $form->dropDownList($model, 'gas_sensor_type_id', $model->getGasSensorTypeDesc()); ?>
+		<?php echo $form->error($model,'gas_sensor_type_id'); ?>
+	</div>
+	
+	<div class="row" id="GA_protection_corps">
 		<?php echo CHtml::activeCheckBox($model, 'protection_corps'); ?>
 		<?php echo $form->labelEx($model,'protection_corps'); ?>
 		<?php echo $form->error($model,'protection_corps'); ?>
 	</div>
+	
+	<div class="row" id="GA_temp_sensor">
+		<?php echo CHtml::activeCheckBox($model, 'temp_sensor'); ?>
+		<?php echo $form->labelEx($model,'temp_sensor'); ?>
+		<?php echo $form->error($model,'temp_sensor'); ?>
+	</div>
 
-	<div class="row">
+	<div class="row" id="GA_lcd">
 		<?php echo CHtml::activeCheckBox($model, 'lcd'); ?>
 		<?php echo $form->labelEx($model,'lcd'); ?>
 		<?php echo $form->error($model,'lcd'); ?>
@@ -115,12 +165,6 @@
 		<?php echo $form->labelEx($model,'supply_voltage_id'); ?>
 		<?php echo $form->dropDownList($model, 'supply_voltage_id', CHtml::listData(SupplyVoltage::model()->findAll(), 'id', 'voltage')); ?>
 		<?php echo $form->error($model,'supply_voltage_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'gas_sensor_type_id'); ?>
-		<?php echo $form->dropDownList($model, 'gas_sensor_type_id', $model->getGasSensorTypeDesc()); ?>
-		<?php echo $form->error($model,'gas_sensor_type_id'); ?>
 	</div>
 
 	<div class="row">
