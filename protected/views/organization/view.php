@@ -31,6 +31,6 @@ $this->menu=array(
     <?php endif; ?>
     <p><?php echo CHtml::link("Добавить новый адрес...", array(
     			'location/create',
-    			'Location[organization_id]'=>$model->id,
+    			'org_id'=>$model->id,
     		)); ?></p>
 </div>

@@ -15,6 +15,7 @@ class LocationController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
+			'orgContext + create', // проверка организации
 		);
 	}
 
@@ -62,6 +63,8 @@ class LocationController extends Controller
 	public function actionCreate()
 	{
 		$model=new Location;
+		
+		$model->organization_id = $this->_organization->id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -172,5 +175,46 @@ class LocationController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	/**
+	 * @var Возвращает организицию, к которой принадлежит данный адрес
+	 */
+	private $_organization = null;
+	
+	/**
+	 * Метод загружает связанную организацию,
+	 * @organization_id — идентификатор связанной организации
+	 * @return Объект модели Organization на основе первичного ключа
+	 */
+	protected function loadOrganization($organization_id)
+	{
+		if ($this->_organization === null)
+		{
+			$this->_organization = Organization::model()->findByPk($organization_id);
+			if ($this->_organization === null)
+			{
+				throw new CHttpException(404, "Такой организации нет в базе");
+			}
+		}
+		return $this->_organization;
+	}
+	
+	/**
+	 * Фильтр для подстановки правильной организации при создании
+	 */
+	public function filterOrgContext($filterChain)
+	{
+		// Получаем ID организации из GET или POST параметра
+		$organizationID = null;
+		if (isset($_GET['org_id']))
+			$organizationID = $_GET['org_id'];
+		else
+			if (isset($_POST['org_id']))
+				$organizationID = $_POST['org_id'];
+
+		$this->loadOrganization($organizationID);
+		
+		$filterChain->run();
 	}
 }

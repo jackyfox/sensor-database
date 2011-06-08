@@ -127,7 +127,11 @@ class OrganizationController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Organization');
+		$dataProvider=new CActiveDataProvider('Organization', array(
+			'pagination'=>array(   
+		    	'pageSize'=>20,
+		    ),
+		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
