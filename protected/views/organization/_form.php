@@ -5,24 +5,24 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Поля, помеченные звездочкой (<span class="required">*</span>), обязательны.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textArea($model,'name',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'inn'); ?>
-		<?php echo $form->textArea($model,'inn',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textField($model,'inn',array('size'=>30,'maxlength'=>15)); ?>
 		<?php echo $form->error($model,'inn'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

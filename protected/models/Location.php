@@ -39,8 +39,7 @@ class Location extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('organization_id', 'required'),
-			array('organization_id', 'numerical', 'integerOnly'=>true),
+			array('address', 'required'),
 			array('address', 'safe'),
 			array('address', 'unique'),
 			// The following rule is used by search().

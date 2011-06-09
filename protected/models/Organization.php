@@ -41,6 +41,8 @@ class Organization extends CActiveRecord
 		return array(
 			array('name, inn', 'safe'),
 			array('name, inn', 'unique'),
+			array('name, inn', 'required'),
+			array('inn', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, inn', 'safe', 'on'=>'search'),

@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Organizations'=>array('index'),
+	'Организации'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Правка',
 );
 
 $this->menu=array(
-	array('label'=>'List Organization', 'url'=>array('index')),
-	array('label'=>'Create Organization', 'url'=>array('create')),
-	array('label'=>'View Organization', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Organization', 'url'=>array('admin')),
+	array('label'=>'Список организаций', 'url'=>array('index')),
+	array('label'=>'Добавить', 'url'=>array('create')),
+	array('label'=>'Просмотр', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Organization <?php echo $model->id; ?></h1>
+<h1>Изменить данные <?php echo $model->name; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

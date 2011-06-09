@@ -1,18 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Locations'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Адреса'=>array('index'),
+	$model->address=>array('view','id'=>$model->id),
+	'Правка',
 );
 
 $this->menu=array(
-	array('label'=>'List Location', 'url'=>array('index')),
-	array('label'=>'Create Location', 'url'=>array('create')),
-	array('label'=>'View Location', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Location', 'url'=>array('admin')),
+	array('label'=>'Упраление', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Location <?php echo $model->id; ?></h1>
+<h1>Изменить адрес <?php echo $model->address; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

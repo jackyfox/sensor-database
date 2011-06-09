@@ -1,15 +1,14 @@
 <?php
 $this->breadcrumbs=array(
-	'Locations',
+	'Адреса',
 );
 
 $this->menu=array(
-	array('label'=>'Create Location', 'url'=>array('create')),
-	array('label'=>'Manage Location', 'url'=>array('admin')),
+	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Locations</h1>
+<h1>Адреса</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
