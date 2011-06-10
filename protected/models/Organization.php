@@ -41,11 +41,11 @@ class Organization extends CActiveRecord
 		return array(
 			array('name, inn', 'safe'),
 			array('name, inn', 'unique'),
-			array('name, inn', 'required'),
+			array('name', 'required'),
 			array('inn', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, inn', 'safe', 'on'=>'search'),
+			array('name, inn', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -86,7 +86,6 @@ class Organization extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('inn',$this->inn,true);
 

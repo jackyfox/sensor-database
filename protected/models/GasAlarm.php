@@ -142,20 +142,8 @@ class GasAlarm extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('factory_number',$this->factory_number,true);
-		$criteria->compare('manufacture_date',$this->manufacture_date,true);
-		$criteria->compare('buzzer',$this->buzzer);
-		$criteria->compare('temp_sensor',$this->temp_sensor);
-		$criteria->compare('explosion_safety',$this->explosion_safety);
-		$criteria->compare('protection_corps',$this->protection_corps);
-		$criteria->compare('lcd',$this->lcd);
 		$criteria->compare('location_id',$this->location_id);
-		$criteria->compare('gas_alarm_type_id',$this->gas_alarm_type_id);
-		$criteria->compare('gas_type_id',$this->gas_type_id);
-		$criteria->compare('control_signals_method_id',$this->control_signals_method_id);
-		$criteria->compare('supply_voltage_id',$this->supply_voltage_id);
-		$criteria->compare('gas_sensor_type_id',$this->gas_sensor_type_id);
 		$criteria->compare('organization_id',$this->organization_id);
 
 		return new CActiveDataProvider(get_class($this), array(

@@ -73,7 +73,10 @@ class LocationController extends Controller
 		{
 			$model->attributes=$_POST['Location'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				Yii::app()->user->setFlash('success',"Новый адрес добавлен");
+				$this->redirect(array('organization/view','id'=>$model->organization_id));
+			}
 		}
 
 		$this->render('create',array(

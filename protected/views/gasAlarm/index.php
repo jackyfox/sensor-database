@@ -7,12 +7,39 @@ $this->menu=array(
 	array('label'=>'Добавить', 'url'=>array('create')),
 	array('label'=>'Управление', 'url'=>array('admin')),
 );
+
+Yii::app()->clientScript->registerScript('search', "
+$('.search-button').click(function(){
+	$('.search-form').toggle();
+	return false;
+});
+$('.search-form form').submit(function(){
+	$.fn.yiiGridView.update('gas-alarm-grid', {
+		data: $(this).serialize()
+	});
+	return false;
+});
+");
 ?>
 
 <h1>Газосигнализаторы</h1>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-    'dataProvider'=>$dataProvider,
+<?php echo CHtml::link('Поиск','#',array('class'=>'search-button')); ?>
+<div class="search-form" style="display:none">
+<p>
+В поисковом запросе можно использовать знаки сравнения (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+or <b>=</b>). Например, чтобы найти все ГС с номером больше 900 введите «&gt;900»
+</p>
+<?php $this->renderPartial('_search',array(
+	'model'=>$model,
+)); ?>
+</div><!-- search-form -->
+
+<?php /* $this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider'=>$dataProvider, */
+	$this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'gas-alarm-grid',
+	'dataProvider'=>$model->search(),
 	'columns'=>array(
 		array(
 			'class' => 'CLinkColumn',

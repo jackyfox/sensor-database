@@ -131,6 +131,7 @@ class GasAlarmController extends Controller
 	 */
 	public function actionIndex()
 	{
+		/*
 		$dataProvider=new CActiveDataProvider('GasAlarm', array(
 			'pagination' => array(
 				'pageSize' => '25',
@@ -138,6 +139,15 @@ class GasAlarmController extends Controller
 		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));
+		*/
+		$model=new GasAlarm('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['GasAlarm']))
+			$model->attributes=$_GET['GasAlarm'];
+
+		$this->render('index',array(
+			'model'=>$model,
 		));
 	}
 

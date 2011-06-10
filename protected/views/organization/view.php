@@ -11,6 +11,12 @@ $this->menu=array(
 	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Управление', 'url'=>array('admin')),
 );
+
+Yii::app()->clientScript->registerScript(
+   'hideFlash',
+   '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");',
+   CClientScript::POS_READY
+);
 ?>
 
 <h1><?php echo $model->name; ?></h1>
@@ -29,6 +35,11 @@ $this->menu=array(
     <?php else: ?>
     	<h3>У данной организации пока не добавлено ни одного адреса</h3>
     <?php endif; ?>
+    <?php if(Yii::app()->user->hasFlash('success')):?>
+	    <div class="flash-success">
+	        <?php echo Yii::app()->user->getFlash('success'); ?>
+	    </div>
+	<?php endif; ?>
     <p><?php echo CHtml::link("Добавить новый адрес...", array(
     			'location/create',
     			'org_id'=>$model->id,
