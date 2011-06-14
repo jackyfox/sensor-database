@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
 <?php if (!Yii::app()->user->isGuest): ?>
-<h1>База газосигнализаторов приветствует Вас, товарищ <?php echo Yii::app()->user->name; ?></h1>
+<h1>База газосигнализаторов приветствует вас, товарищ <?php echo Yii::app()->user->name; ?></h1>
 <p>Последний логин 
 <?php 
 	/**
@@ -15,10 +15,10 @@
 	echo date(' Y в ', $last_login_time);
 	echo date('G:i', $last_login_time);
 ?>.
+<?php else: ?>
+<h1>Добро пожалость в базу газосигнализаторов</h1>
+<p>Для обновления базы следует залогиниться. <?php echo CHtml::link('Вход', array('site/login'));?></p>
+<?php endif; ?>
 <div>
 	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?></p>
 </div>
-<?php else: ?>
-<h1>Добро пожалость в базу газосигнализаторов</h1>
-<p>Для работы с базой следует залогиниться. <?php echo CHtml::link('Вход', array('site/login'));?></p>
-<?php endif; ?>
