@@ -1,10 +1,10 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - About';
+$this->pageTitle=Yii::app()->name . ' - Инфо';
 $this->breadcrumbs=array(
-	'About',
+	'Инфо',
 );
 ?>
-<h1>About</h1>
+<h1>О базе</h1>
 
-<p>This is a "static" page. You may change the content of this page
-by updating the file <tt><?php echo __FILE__; ?></tt>.</p>
+<p>Вы зашли в базу газосигнализаторов Санкт-Петербургского института теплоэнергетики.</p>
+<p>Тут хранится информация о ГС, выпущенных СПб ИТЭ, данные калибровок и опробований, сведения о поверке ГС.</p>
