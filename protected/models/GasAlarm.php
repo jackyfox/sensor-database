@@ -35,6 +35,24 @@
 class GasAlarm extends CActiveRecord
 {
 	/**
+	 * Дата последней замены сенсора
+	 */
+	public function getLastSensorChange()
+	{
+		if ($this->maintenanceCount > 0)
+		{
+			$ms = array_reverse($this->maintenances);
+			foreach ($ms as $m)
+			{
+				if ($m->maintenance_type_id == 1)
+					return date('d.m.Y', strtotime($m->date))."*";
+			}
+		} 
+		
+		return date('d.m.Y', strtotime($this->manufacture_date)); 
+	}
+	
+	/**
 	 * Корректируем дату для занесения в БД
 	 */
 	public function beforeSave()
@@ -128,6 +146,7 @@ class GasAlarm extends CActiveRecord
 			'supply_voltage_id' => 'Напряжение питания',
 			'gas_sensor_type_id' => 'Тип чувствительного элемента',
 			'organization_id' => 'Организация',
+			'lastSensorChange' => 'Последняя замена сенсора',
 		);
 	}
 
@@ -220,15 +239,17 @@ class GasAlarm extends CActiveRecord
 		else 
 			$code_name .= "-";
 		$code_name .= $this->buzzer."-";
-		$code_name .= $this->supplyVoltage->voltage;
-		
+			
 		if ($this->gasAlarmType->type === "СГИТЭ")
 		{
 			if ($this->explosion_safety == 1)
-				$code_name .= "-1ExibIIAT4";
+				$code_name .= "1ExibIIAT4";
+			else
+				$code_name .= $this->supplyVoltage->voltage;
 		}
 		else 
 		{
+			$code_name .= $this->supplyVoltage->voltage;
 			$code_name .= "-".$this->getGasSensorTypeText();
 			if ($this->temp_sensor == 1 || $this->lcd == 1)
 			{

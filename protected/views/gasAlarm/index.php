@@ -80,5 +80,12 @@ or <b>=</b>). Например, чтобы найти все ГС с номер�
 				'style' => 'width: 60px;'
 			),
  		),
+ 		array(
+ 			'name'  => 'lastSensorChange',
+ 			'value' => '$data->lastSensorChange', 
+ 			'headerHtmlOptions' => array(
+				'style' => 'width: 60px;'
+			),
+ 		),
 	),
 )); ?>
