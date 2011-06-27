@@ -1,3 +1,21 @@
+<?php 
+/* 
+ * Данный скрипт сбрасывает все поля формы и отправляет форму.
+ * В итоге при нажатии на кнопку сброса, пользователю показываются
+ * все газосигнализаторы.
+ */
+Yii::app()->clientScript->registerScript('clear-search-form', "
+$('input[name=reset-button]').click(function(){
+	$(':input','form:first') 
+	.not(':button, :submit, :reset, :hidden') 
+	.val('') 
+	.removeAttr('checked') 
+	.removeAttr('selected');
+	$('form:first').submit();
+});
+");
+?>
+
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -22,6 +40,9 @@
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Поиск'); ?>
+		<?php echo CHtml::Button('Сбросить условия поиска', array(
+			'name'=>'reset-button',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
