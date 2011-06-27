@@ -166,6 +166,13 @@ class GasAlarm extends CActiveRecord
 		$criteria->compare('organization_id',$this->organization_id);
 
 		return new CActiveDataProvider(get_class($this), array(
+			'pagination'=>array(
+				// Получаем длину страницы из параметров польозвателя 
+				'pageSize'=> Yii::app()->user->getState('pageSize',
+				// Стандартное значение defaultPageSize
+				// задано ранее в main.php, в секции params
+					Yii::app()->params['defaultPageSize']),
+			),
 			'criteria'=>$criteria,
 		));
 	}

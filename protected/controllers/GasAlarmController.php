@@ -141,6 +141,16 @@ class GasAlarmController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 		*/
+		
+		/**
+		 * Настраиваем переменную с количеством строк на странице
+		 */
+		if (isset($_GET['pageSize'])) {
+			// pageSize устанавливается как параметр пользователя
+			Yii::app()->user->setState('pageSize',(int)$_GET['pageSize']);
+			unset($_GET['pageSize']);
+		}
+		
 		$model=new GasAlarm('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['GasAlarm']))

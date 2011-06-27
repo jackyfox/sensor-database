@@ -35,11 +35,19 @@ $('.search-form form').submit(function(){
 )); ?>
 </div><!-- search-form -->
 
+<?php $pageSize=Yii::app()->user->getState('pageSize',Yii::app()->params['defaultPageSize']); ?>
 <?php /* $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$dataProvider, */
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'gas-alarm-grid',
 	'dataProvider'=>$model->search(),
+	'summaryText'=>'Показано с {start} по {end} из {count} ГС. Показывать по ' .
+        CHtml::dropDownList(
+            'pageSize',
+            $pageSize,
+            array(10=>10,20=>20,50=>50,100=>100),
+            array('class'=>'change-pageSize')) .
+        ' ГС на страницу',
 	'columns'=>array(
 		array(
 			'class' => 'CLinkColumn',
@@ -89,3 +97,9 @@ $('.search-form form').submit(function(){
  		),
 	),
 )); ?>
+<?php Yii::app()->clientScript->registerScript('initPageSize',<<<EOD
+    $('.change-pageSize').live('change', function() {
+        $.fn.yiiGridView.update('gas-alarm-grid',{ data:{ pageSize: $(this).val() }})
+    });
+EOD
+,CClientScript::POS_READY); ?>
