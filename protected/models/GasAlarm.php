@@ -35,6 +35,19 @@
 class GasAlarm extends CActiveRecord
 {
 	/**
+	 * Указатель того, что создается интервал ГС
+	 * @var boolean
+	 */
+	public $interval=false;
+	
+	/**
+	 * При вводе интервала зав. номеров, указываете его последнее значение
+	 * @var integer
+	 */
+	
+	public $interval_end=NULL;
+	
+	/**
 	 * Дата последней замены сенсора
 	 */
 	public function getLastSensorChange()
@@ -89,6 +102,7 @@ class GasAlarm extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('interval_end', 'numerical', 'integerOnly'=>true),
 			array('factory_number, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, organization_id', 'required'),
 			array('gas_sensor_type_id', 'in', 'range'=>array(1,2,3)),
 			array('buzzer, temp_sensor, explosion_safety, protection_corps, lcd, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, gas_sensor_type_id, organization_id', 'numerical', 'integerOnly'=>true),
@@ -147,6 +161,7 @@ class GasAlarm extends CActiveRecord
 			'gas_sensor_type_id' => 'Тип чувствительного элемента',
 			'organization_id' => 'Организация',
 			'lastSensorChange' => 'Последняя замена сенсора',
+			'interval' => 'интервал',
 		);
 	}
 

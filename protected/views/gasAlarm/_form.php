@@ -71,13 +71,16 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'gas_alarm_type_id'); ?>
-		<?php echo $form->dropDownList($model, 'gas_alarm_type_id', CHtml::listData(GasAlarmType::model()->findAll(), 'id', 'type')); ?>
+		<?php echo $form->dropDownList($model, 'gas_alarm_type_id', CHtml::listData(GasAlarmType::model()->findAll(), 'id', 'type')); ?> 
 		<?php echo $form->error($model,'gas_alarm_type_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'factory_number'); ?>
 		<?php echo $form->textField($model,'factory_number',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo CHtml::activeCheckBox($model, 'interval'); ?>
+		<?php echo CHtml::activeLabel($model, "interval", array("title"=>"Можно добавить сразу несколько датчиков, указав интервал зав. номеров, например, с 10 по 34 включительно.")); ?>
+		<?php echo $form->textField($model, "interval_end", array('size'=>10,'maxlength'=>10,)); ?>
 		<?php echo $form->error($model,'factory_number'); ?>
 	</div>
 
