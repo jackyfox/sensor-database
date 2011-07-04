@@ -85,7 +85,7 @@ Yii::app()->clientScript->registerScript(
 			'value' => '$data->gasType->type',
 		),
 		array(
-			'name'  => 'organization',
+			'name'  => 'organization_id',
 			'header'=> 'Организация',
 			'value' => '$data->organization->name',
  		),
