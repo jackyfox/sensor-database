@@ -1,5 +1,32 @@
 <div class="form">
 
+<?php 
+/**
+ * Показ и скрытие поля конца интервала
+ */
+Yii::app()->clientScript->registerScript('interval_end_toggle', '
+	if($("#GasAlarm_interval").is(":checked"))
+	{
+		$("#GasAlarm_interval").show();
+	}
+	else
+	{
+		$("#GasAlarm_interval_end").hide();
+	}
+	$("#GasAlarm_interval").click(function ()
+	{
+		if ($(this).is(":checked"))
+		{
+			$("#GasAlarm_interval_end").fadeIn();
+		}
+		else
+		{
+			$("#GasAlarm_interval_end").fadeOut();
+		}
+	});
+',CClientScript::POS_READY); 
+?>
+
 <?php if(!$model->isNewRecord)
     Yii::app()->clientScript->registerScript('new_ga_form','
         $.ajax(
@@ -30,6 +57,17 @@
 			$("#GA_temp_sensor").hide();
 			// ...ЖКИ.
 			$("#GA_lcd").hide();
+		}
+		else
+		{
+			// Показываем тип чувствительного элемента,..
+			$("#GA_sensor_type").show();
+			// ...степерь защиты корпуса,..
+			$("#GA_protection_corps").show();
+			// ...датчик температуры,..
+			$("#GA_temp_sensor").show();
+			// ...ЖКИ.
+			$("#GA_lcd").show();
 		}
 		
 		$("#GasAlarm_gas_alarm_type_id").change(function() {
@@ -65,7 +103,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Поля помеченные звездочкой <span class="required">*</span> обязательны.</p>
+	<p class="note">Поля, помеченные звездочкой (<span class="required">*</span>), обязательны.</p>
 
 	<?php echo $form->errorSummary($model); if($this->action) ?>
 
@@ -78,9 +116,20 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'factory_number'); ?>
 		<?php echo $form->textField($model,'factory_number',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo CHtml::activeCheckBox($model, 'interval'); ?>
-		<?php echo CHtml::activeLabel($model, "interval", array("title"=>"Можно добавить сразу несколько датчиков, указав интервал зав. номеров, например, с 10 по 34 включительно.")); ?>
-		<?php echo $form->textField($model, "interval_end", array('size'=>10,'maxlength'=>10,)); ?>
+		 
+		<?php
+			/**
+			 * Элементы для создания интервала ГС.
+			 * Выводятся только при создании нового ГС
+			 */
+			if($model->isNewRecord)
+			{
+				echo CHtml::activeCheckBox($model, 'interval').' '; 
+				echo CHtml::activeLabel($model, "interval", array("title"=>"Можно добавить сразу несколько датчиков, указав интервал зав. номеров, например, с 10 по 34 включительно.")).' '; 
+				echo CHtml::activeTextField($model, "interval_end", array('size'=>10,'maxlength'=>10,));
+				echo CHtml::error($model, 'interval_end');
+			} 
+		?>
 		<?php echo $form->error($model,'factory_number'); ?>
 	</div>
 
@@ -160,7 +209,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'control_signals_method_id'); ?>
-		<?php echo $form->dropDownList($model, 'control_signals_method_id', CHtml::listData(ControlSignalsMethod::model()->findAll(), 'id', 'desc')); ?>
+		<?php echo $form->dropDownList($model, 'control_signals_method_id', CHtml::listData(ControlSignalsMethod::model()->findAll(), 'id', 'type', 'desc')); ?>
 		<?php echo $form->error($model,'control_signals_method_id'); ?>
 	</div>
 
@@ -174,22 +223,28 @@
 		<?php echo $form->labelEx($model,'organization_id'); ?>
 		<?php echo $form->dropDownList($model, 'organization_id', CHtml::listData(Organization::model()->findAll(), 'id', 'name'),	array(
 				'empty'=>'- выберите организацию -',
-				'onchange'=>'js:$("div#location").fadeIn()',
+				//'onchange'=>'js:$("div#location").fadeIn()',
 				'ajax' => array(
 					'type'=>'POST', //request type
 					'url'=>CController::createUrl('dloc'), //url to call.
 					'update'=>'#'.CHtml::activeId($model, 'location_id'), //selector to update
 					//'data'=>'js:$("div#location").fadeIn()' 
 					//leave out the data key to pass all form values through
+					'beforeSend' => 'function(){
+			            $("#location").addClass("loading");
+			        }',
+			        'complete' => 'function(){
+			            $("#location").removeClass("loading");
+			        }',
 				))); ?>
 		<?php echo $form->error($model,'organization_id'); ?>
 	</div>
 
 	<!-- style="display: none;"  -->
 
-	<div class="row" id="location" <?php if($model->isNewRecord) echo 'style="display: none;"' ?> >
+	<div class="row" id="location" <?php //if($model->isNewRecord) echo 'style="display: none;"' ?> >
 		<?php echo $form->labelEx($model,'location_id'); ?>
-		<?php echo $form->dropDownList($model, 'location_id', CHtml::listData(Location::model()->findAll(), 'id', 'address'), array('empty'=>'- выберите адрес -')); ?>
+		<?php echo $form->dropDownList($model, 'location_id', CHtml::listData(Location::model()->findAll(), 'id', 'address'), array('empty'=>'- сначала выберите адрес -')); ?>
 		<?php echo $form->error($model,'location_id'); ?>
 	</div>
 

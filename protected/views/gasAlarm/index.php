@@ -20,6 +20,12 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+
+Yii::app()->clientScript->registerScript(
+   'hideFlash',
+   '$(".flash-success").animate({opacity: 1.0}, 10000).fadeOut("slow");',
+   CClientScript::POS_READY
+);
 ?>
 
 <h1>Газосигнализаторы</h1>
@@ -34,6 +40,13 @@ $('.search-form form').submit(function(){
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
+
+<?php if(Yii::app()->user->hasFlash('success')):?>
+	<p></p>
+    <div class="flash-success">
+        <?php echo Yii::app()->user->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 
 <?php $pageSize=Yii::app()->user->getState('pageSize',Yii::app()->params['defaultPageSize']); ?>
 <?php /* $this->widget('zii.widgets.grid.CGridView', array(

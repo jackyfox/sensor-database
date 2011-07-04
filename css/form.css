@@ -165,12 +165,12 @@ input[type=radio] + label, input[type=checkbox] + label
 }
 
 div.loading {
-    background-color: #eee;
-    background-image: url('images/loader.gif');
-    background-position:  center center;
+    /* background-color: #eee; */
+    background-image: url('../images/loader.gif');
+    background-position:  center left;
     background-repeat: no-repeat;
     opacity: 1;
 }
 div.loading * {
-    opacity: .8;
+    opacity: .7;
 }

@@ -71,7 +71,57 @@ class GasAlarmController extends Controller
 		if(isset($_POST['GasAlarm']))
 		{
 			$model->attributes=$_POST['GasAlarm'];
-			if($model->save())
+			
+			/**
+			 * Добавление интервала датчиков
+			 */
+			if($model->interval)
+			{
+				$start_num = $model->factory_number;
+				$end_num   = $model->interval_end;
+				$total     = $end_num - $start_num + 1;
+				
+				$current_num = $start_num;
+	
+				/**
+				 * Сохраняем модель с первым зав. № из интервала.
+				 * В $all_saved будем хранить результат сохранения очередной модели.
+				 * В случае успешного сохранения всех моделей, перенаправляем
+				 * на индексную страницу.
+				 */
+				$all_saved = $model->save();
+				
+				while ($current_num != $end_num && $all_saved)
+				{
+					$model = new GasAlarm;
+					$model->attributes=$_POST['GasAlarm'];
+					$model->interval = 0;
+					
+					$current_num++;
+					$model->factory_number = $current_num;
+					
+					$all_saved = $model->save();
+				}
+				
+				if($all_saved)
+				{
+					/**
+					 * Блосаем флеш с сообщением о добавление $total датчиков
+					 * с номерами со $start_num по $end_num
+					 */
+					Yii::app()->user->setFlash(
+						'success',
+						"Добавлено $total ГС. Заводские номера с $start_num по $end_num"
+					);
+					
+					// Перенаправляем на индексную страницу
+					$this->redirect(array('index'));
+				}
+				 
+				
+			}
+			
+			else if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
@@ -97,6 +147,7 @@ class GasAlarmController extends Controller
 		if(isset($_POST['GasAlarm']))
 		{
 			$model->attributes=$_POST['GasAlarm'];
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

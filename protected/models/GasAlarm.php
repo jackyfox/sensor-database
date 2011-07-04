@@ -38,10 +38,10 @@ class GasAlarm extends CActiveRecord
 	 * Указатель того, что создается интервал ГС
 	 * @var boolean
 	 */
-	public $interval=false;
+	public $interval;
 	
 	/**
-	 * При вводе интервала зав. номеров, указываете его последнее значение
+	 * При вводе интервала зав. номеров, указывает его последнее значение
 	 * @var integer
 	 */
 	
@@ -95,6 +95,20 @@ class GasAlarm extends CActiveRecord
 	}
 
 	/**
+	 * Валидация конца интервала  необходимо определить,
+	 */
+	public function valid_interval_end($attribute, $params)
+	{
+		// Если уставновлен флажок интервала
+		if($this->interval)
+		{
+			// Создаем валидотор для конца интервала
+			$validator = CValidator::createValidator('compare', $this, $attribute, array('compareAttribute'=>'factory_number', 'operator'=>'>', 'on'=>'insert', 'message'=>'Конец интервала должен быть больше его начала'));
+			$validator->validate($this);
+		}
+	}
+	
+	/**
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -102,10 +116,12 @@ class GasAlarm extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('interval_end', 'numerical', 'integerOnly'=>true),
+			array('interval_end', 'numerical', 'integerOnly'=>true, 'on'=>'insert', 'message'=>'Значение конца интервала должно быть целым числом'),
+			// Специальный валидотор для конца интервала. Описан в начале файла
+			array('interval_end', 'valid_interval_end'),
 			array('factory_number, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, organization_id', 'required'),
 			array('gas_sensor_type_id', 'in', 'range'=>array(1,2,3)),
-			array('buzzer, temp_sensor, explosion_safety, protection_corps, lcd, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, gas_sensor_type_id, organization_id', 'numerical', 'integerOnly'=>true),
+			array('interval, buzzer, temp_sensor, explosion_safety, protection_corps, lcd, location_id, gas_alarm_type_id, gas_type_id, control_signals_method_id, supply_voltage_id, gas_sensor_type_id, organization_id', 'numerical', 'integerOnly'=>true),
 			array('factory_number', 'length', 'max'=>10),
 			array('manufacture_date', 'safe'),
 			// The following rule is used by search().
