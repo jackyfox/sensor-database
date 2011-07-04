@@ -205,6 +205,9 @@ class GasAlarm extends CActiveRecord
 					Yii::app()->params['defaultPageSize']),
 			),
 			'criteria'=>$criteria,
+			'sort' => array(
+		      'defaultOrder' => 'id DESC',
+		   ),
 		));
 	}
 	
