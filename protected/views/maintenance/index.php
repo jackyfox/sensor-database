@@ -33,7 +33,7 @@ $this->menu=array(
         array(
         	'name'=>'date',
         	'type'=>'raw',
-        	'value'=>'CHtml::link(date("d.m.Y", strtotime($data->date)), "maintenance/view",array("id"=>$data->id))',
+        	'value'=>'CHtml::link(date("d.m.Y", strtotime($data->date)), array("maintenance/view", "id"=>$data->id))',
 		),
 		array(
 			'class' => 'CLinkColumn',
