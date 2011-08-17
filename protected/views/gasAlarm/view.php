@@ -60,3 +60,7 @@ $this->menu=array(
 		'maintenances' => $model->maintenances,
 	)); ?>
 <?php endif; ?>
+<span class="add-new-data"><?php echo CHtml::link("Добавить данные о новом сервисном обслуживании...", array(
+    			'maintenance/create',
+    			'ga_id'=>$model->id,
+    		)); ?></span>

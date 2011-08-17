@@ -14,7 +14,8 @@ class MaintenanceController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl',
+			'gasAlarmContext + create', // perform access control for CRUD operations
 		);
 	}
 
@@ -62,6 +63,8 @@ class MaintenanceController extends Controller
 	public function actionCreate()
 	{
 		$model=new Maintenance;
+		$model->date = date('d.m.Y', time());
+		$model->gas_alarm_id = $this->_gas_alarm->id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -70,7 +73,7 @@ class MaintenanceController extends Controller
 		{
 			$model->attributes=$_POST['Maintenance'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
 		}
 
 		$this->render('create',array(
@@ -89,12 +92,14 @@ class MaintenanceController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
+		$model->date = date('d.m.Y', strtotime($model->date));
 
 		if(isset($_POST['Maintenance']))
 		{
 			$model->attributes=$_POST['Maintenance'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
 		}
 
 		$this->render('update',array(
@@ -127,9 +132,30 @@ class MaintenanceController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Maintenance');
+		/*
+		$dataProvider=new CActiveDataProvider('Maintenance', array(
+			'sort'=>$sort,
+		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));
+		*/
+		/**
+		 * Настраиваем переменную с количеством строк на странице
+		 */
+		if (isset($_GET['pageSize'])) {
+			// pageSize устанавливается как параметр пользователя
+			Yii::app()->user->setState('pageSize',(int)$_GET['pageSize']);
+			unset($_GET['pageSize']);
+		}
+		
+		$model=new Maintenance('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Maintenance']))
+			$model->attributes=$_GET['Maintenance'];
+
+		$this->render('index',array(
+			'model'=>$model,
 		));
 	}
 
@@ -172,5 +198,46 @@ class MaintenanceController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	/**
+	 * @var Возвращает газосигнализатор, к которому относится данное
+	 * техобслуживание
+	 */
+	private $_gas_alarm = null;
+	
+	/**
+	 * Метод загружает связанный газосигнализатор,
+	 * @gas_alarm_id — идентификатор связанного газосигнализатора
+	 * @return Объект модели GasAlarm на основе первичного ключа
+	 */
+	protected function loadGasAlarm($gas_alarm_id)
+	{
+		if ($this->_gas_alarm === null)
+		{
+			$this->_gas_alarm = GasAlarm::model()->findByPk($gas_alarm_id);
+			if ($this->_gas_alarm === null)
+			{
+				throw new CHttpException(404, "Такого ГС нет в базе");
+			}
+		}
+		return $this->_gas_alarm;
+	}
+	
+	/**
+	 * Фильтр подстановки газосигнализатора при создании
+	 */
+	public function filterGasAlarmContext($filterChain)
+	{
+		$gas_alarmID = null;
+		if (isset($_GET['ga_id']))
+			$gas_alarmID = $_GET['ga_id'];
+		else
+			if (isset($_POST['ga_id']))
+				$gas_alarmID = $_POST['ga_id'];
+
+		$this->loadGasAlarm($gas_alarmID);
+		
+		$filterChain->run();
 	}
 }

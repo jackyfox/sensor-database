@@ -20,5 +20,5 @@
 <p>Для обновления базы следует залогиниться. <?php echo CHtml::link('Вход', array('site/login'));?></p>
 <?php endif; ?>
 <div>
-	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?></p>
+	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?> | <?php echo CHtml::link('Сервисное обслуживание', array('/maintenance')); ?></p>
 </div>

@@ -63,7 +63,7 @@ class MaintenanceType extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'type' => 'Тип',
+			'type' => 'Вид работ',
 		);
 	}
 

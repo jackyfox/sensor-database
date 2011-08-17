@@ -20,6 +20,20 @@ class Maintenance extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Maintenance the static model class
 	 */
+	
+	/**
+	 * Корректируем дату для занесения в БД
+	 */
+	public function beforeSave()
+	{
+		/**
+		 * Преобразует строку вида «15.09.2011»  к формату БД «2011-09-15»
+		 */
+		$this->date = date('Y-m-d', strtotime($this->date));
+		
+		return parent::beforeSave();
+	}
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -46,7 +60,7 @@ class Maintenance extends CActiveRecord
 			array('note', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, date, note, maintenance_type_id, gas_alarm_id', 'safe', 'on'=>'search'),
+			array('factory_number, id, date, note, maintenance_type_id, gas_alarm_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,6 +88,7 @@ class Maintenance extends CActiveRecord
 			'note' => 'Заметки',
 			'maintenance_type_id' => 'Вид работ',
 			'gas_alarm_id' => 'Газосигнализатор',
+			'factory_number'=>'Зав. №',
 		);
 	}
 
@@ -88,14 +103,33 @@ class Maintenance extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('date',$this->date,true);
-		$criteria->compare('note',$this->note,true);
 		$criteria->compare('maintenance_type_id',$this->maintenance_type_id);
 		$criteria->compare('gas_alarm_id',$this->gas_alarm_id);
+		
+		$criteria->with = array('gasAlarm');
+		
+		$sort = new CSort();
+		$sort->defaultOrder = 'date DESC';
+		$sort->attributes = array(
+			'date',
+		    'factory_number'=>array(
+				'asc'=>'gasAlarm.factory_number',
+			    'desc'=>'gasAlarm.factory_number DESC',
+			),
+		    'maintenance_type_id',
+		);
 
 		return new CActiveDataProvider(get_class($this), array(
+			'pagination'=>array(
+				// Получаем длину страницы из параметров польозвателя 
+				'pageSize'=> Yii::app()->user->getState('pageSize',
+				// Стандартное значение defaultPageSize
+				// задано ранее в main.php, в секции params
+					Yii::app()->params['defaultPageSize']),
+			),
 			'criteria'=>$criteria,
+			'sort' => $sort,
 		));
 	}
 }
