@@ -12,14 +12,16 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
-	border: 1px solid #C9E0ED;
+	/*border: 1px solid #C9E0ED;*/
+	border: 1px solid #bebebe;
 }
 
 #header
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	/*border-top: 3px solid #C9E0ED;*/
+	border-top: 3px solid #bebebe;
 }
 
 #content
@@ -38,7 +40,8 @@ body
 	margin: 10px 20px;
 	font-size: 0.8em;
 	text-align: center;
-	border-top: 1px solid #C9E0ED;
+	/*border-top: 1px solid #C9E0ED;*/
+	border-top: 1px solid #bebebe;
 }
 
 #logo
@@ -75,8 +78,11 @@ body
 
 #mainmenu ul li a:hover, #mainmenu ul li.active a
 {
-	color: #6399cd;
-	background-color:#EFF4FA;
+	/*color: #6399cd;*/
+	/*background-color:#EFF4FA;*/
+	color: #444;
+	text-shadow: white 0 1px;
+	background-color:#e0e0e0;
 	text-decoration:none;
 }
 
@@ -161,8 +167,9 @@ div.search-form
 .portlet-decoration
 {
 	padding: 3px 8px;
-	background: #B7D6E7;
-	border-left: 5px solid #6FACCF;
+	background: #e0e0e0;
+	border-left: 5px solid #bebebe;
+	border-top: 5px solid #bebebe;
 }
 
 .portlet-title
@@ -171,7 +178,8 @@ div.search-form
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
-	color: #298dcd;
+	color: #444;
+    text-shadow: white 0 1px;
 }
 
 .portlet-content
@@ -179,7 +187,8 @@ div.search-form
 	font-size:0.9em;
 	margin: 0 0 15px 0;
 	padding: 5px 8px;
-	background:#EFFDFF;
+	background:#f5f5f5;
+	border-left: 5px solid #bebebe;
 }
 
 .portlet-content ul
@@ -211,7 +220,7 @@ div.search-form
 .operations li a
 {
 	font: bold 12px Arial;
-	color: #0066A4;
+	color: #444;
 	display: block;
 	padding: 2px 0 2px 8px;
 	line-height: 15px;
@@ -220,12 +229,12 @@ div.search-form
 
 .operations li a:visited
 {
-	color: #0066A4;
+	color: #444;
 }
 
 .operations li a:hover
 {
-	background: #80CFFF;
+	background: #dadada;
 }
 
 /* styles for GasAlarm view page */

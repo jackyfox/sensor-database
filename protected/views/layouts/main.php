@@ -32,7 +32,8 @@
 				array('label'=>'Инфо', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Контакте', 'url'=>array('/site/contact')),
 				array('label'=>'Вход', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Выход ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Выход ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'На главную сервера', 'url'=>'http://'.$_SERVER['HTTP_HOST'].'/')
 			),
 		)); ?>
 	</div><!-- mainmenu -->
