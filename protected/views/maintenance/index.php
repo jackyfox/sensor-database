@@ -21,6 +21,7 @@ $this->menu=array(
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'maintenances-grid',
 	'dataProvider'=>$model->search(),
+	'cssFile' => Yii::app()->baseUrl . '/css/gridView/gridView.css',
 	//'filter'=>$model,
 	'summaryText'=>'Показано с {start} по {end} из {count}. Показывать по ' .
         CHtml::dropDownList(
@@ -47,7 +48,7 @@ $this->menu=array(
 		),
 		array(
 			'name'  => 'factory_number',
-			'header'=> 'Зав .№',
+			'header'=> '№',
 			'value' => '$data->gasAlarm->factory_number',
 			'headerHtmlOptions' => array(
 				'title' => 'Заводской номер',

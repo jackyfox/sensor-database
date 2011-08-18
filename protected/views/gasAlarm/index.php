@@ -54,6 +54,7 @@ Yii::app()->clientScript->registerScript(
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'gas-alarm-grid',
 	'dataProvider'=>$model->search(),
+	'cssFile' => Yii::app()->baseUrl . '/css/gridView/gridView.css',
 	'summaryText'=>'Показано с {start} по {end} из {count} ГС. Показывать по ' .
         CHtml::dropDownList(
             'pageSize',
@@ -73,7 +74,7 @@ Yii::app()->clientScript->registerScript(
 		),
 		array(
 			'name'  => 'factory_number',
-			'header'=> 'Зав .№',
+			'header'=> '№',
 			'value' => '$data->factory_number',
 			'headerHtmlOptions' => array(
 				'title' => 'Заводской номер',

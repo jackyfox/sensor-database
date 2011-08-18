@@ -13,12 +13,12 @@ $this->menu=array(
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$dataProvider,
+	'cssFile' => Yii::app()->baseUrl . '/css/gridView/gridView.css',
 	'columns'=>array(
 		array(
-			'class' => 'CLinkColumn',
-			'header' => 'Название',
-			'labelExpression' => '$data->name',
-			'urlExpression' => 'Yii::app()->createUrl("organization/view",array("id"=>$data->id))',
+			'name'=>'name',
+        	'type'=>'raw',
+        	'value'=>'CHtml::link($data->name, array("organization/view", "id"=>$data->id))',
 		),
 		array(
 			'name'  => 'inn',
