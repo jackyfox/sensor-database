@@ -26,6 +26,14 @@ Yii::app()->clientScript->registerScript(
    '$(".flash-success").animate({opacity: 1.0}, 10000).fadeOut("slow");',
    CClientScript::POS_READY
 );
+
+/* Обновление таблицы при изменении количества строк */
+Yii::app()->clientScript->registerScript('initPageSize',<<<EOD
+    $('.change-pageSize').live('change', function() {
+        $.fn.yiiGridView.update('gas-alarm-grid',{ data:{ pageSize: $(this).val() }})
+    });
+EOD
+,CClientScript::POS_READY);
 ?>
 
 <h1>Газосигнализаторы</h1>
@@ -111,9 +119,3 @@ Yii::app()->clientScript->registerScript(
  		),
 	),
 )); ?>
-<?php Yii::app()->clientScript->registerScript('initPageSize',<<<EOD
-    $('.change-pageSize').live('change', function() {
-        $.fn.yiiGridView.update('gas-alarm-grid',{ data:{ pageSize: $(this).val() }})
-    });
-EOD
-,CClientScript::POS_READY); ?>

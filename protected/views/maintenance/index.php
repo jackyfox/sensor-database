@@ -6,6 +6,14 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Управление', 'url'=>array('admin')),
 );
+
+/* Обновление таблицы при изменении количества строк */
+Yii::app()->clientScript->registerScript('initPageSize',<<<EOD
+    $('.change-pageSize').live('change', function() {
+        $.fn.yiiGridView.update('maintenances-grid',{ data:{ pageSize: $(this).val() }})
+    });
+EOD
+,CClientScript::POS_READY);
 ?>
 
 <h1>Сервисное обслуживание</h1>
