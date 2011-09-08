@@ -31,7 +31,7 @@ class OrganizationController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','addNew'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -78,6 +78,39 @@ class OrganizationController extends Controller
 		));
 	}
 
+	/**
+	 * Добавляет организацию прямо на странице нового ГС
+	 */
+	public function actionAddNew() 
+	{
+        $model=new Organization;
+        // Ajax Validation enabled
+        $this->performAjaxValidation($model);
+        // Флаг, определяющий, добавляем ли мы новую организацю или просто
+        // отображаем форму
+        $flag=true;
+        if(isset($_POST['Organization']))
+        {
+        	$flag=false;
+            $model->attributes=$_POST['Organization'];
+ 
+            if($model->save()) 
+            {
+                //Возвращаем <option> и выбираем его в списке
+                echo CHtml::tag('option',array (
+	                'value'=>$model->id,
+	                'selected'=>true
+                ),CHtml::encode($model->name),true);
+            }
+        }
+        if($flag)
+        {
+        	Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+        	$this->renderPartial('createDialog',array('model'=>$model,),false,true);
+		}
+    }
+	
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

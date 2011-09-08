@@ -27,9 +27,9 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 ',CClientScript::POS_READY); 
 ?>
 
-<?php if(!$model->isNewRecord)
-    Yii::app()->clientScript->registerScript('new_ga_form','
-        $.ajax(
+<?php Yii::app()->clientScript->registerScript('update_location','
+    function upd_loc() { 
+    	$.ajax(
 			{ 
 				type: "POST",
 				url:  "'.CController::createUrl('dloc').'",
@@ -39,8 +39,40 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 					$("#GasAlarm_location_id").html(html);
 				}
 			}
-		)
-    ',CClientScript::POS_READY);  
+		);
+		// При редактировании свойств ГС сразу отображаем ссылку на добавление 
+		// новой организации
+		$("#new_location").attr("href", "'.$this->createUrl('location/create', array('org_id'=>$model->organization_id)).'"); 
+		$("#new_location").show();
+	}
+    ',CClientScript::POS_READY);
+?>
+
+<?php if(!$model->isNewRecord)
+    Yii::app()->clientScript->registerScript('not_new_ga_form','
+		$.ajax(
+			{ 
+				type: "POST",
+				url:  "'.CController::createUrl('dloc').'",
+				cache: false,
+				data: "GasAlarm[organization_id])='.$model->organization_id.'",
+				success: function(html){
+					$("#GasAlarm_location_id").html(html);
+					$("#GasAlarm_location_id option:selected").each(function(){
+						this.selected=false;
+					});
+					$("#GasAlarm_location_id option[value=\''.$model->location_id.'\']").attr("selected", "selected");
+					//$("#GasAlarm_location_id").val('.$model->location_id.');
+				}
+			}
+		);
+		// При редактировании свойств ГС сразу отображаем ссылку на добавление 
+		// новой организации
+		$("#new_location").attr("href", "'.$this->createUrl('location/create', array('org_id'=>$model->organization_id)).'"); 
+		$("#new_location").show();
+		
+		
+	',CClientScript::POS_READY);  
 ?>
 
 <?php
@@ -221,6 +253,7 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'organization_id'); ?>
+		<div id="organization">
 		<?php echo $form->dropDownList($model, 'organization_id', CHtml::listData(Organization::model()->findAll(), 'id', 'name'),	array(
 				'empty'=>'- выберите организацию -',
 				//'onchange'=>'js:$("div#location").fadeIn()',
@@ -232,11 +265,25 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 					//leave out the data key to pass all form values through
 					'beforeSend' => 'function(){
 			            $("#location").addClass("loading");
+			            $("#new_location").hide();
 			        }',
 			        'complete' => 'function(){
 			            $("#location").removeClass("loading");
+			            //Если выбрана организация, формируем и отображаем ссылку на добавление нового адреса
+			            if ($("#'.CHtml::activeId($model, 'organization_id').'").val())
+			            {
+			            	$("#new_location").attr("href", "'.$this->createUrl('location/create').'&org_id=" + $("#'.CHtml::activeId($model, 'organization_id').'").val());
+			            	$("#new_location").show();
+			            }
 			        }',
 				))); ?>
+		<?php echo CHtml::ajaxLink("Добавить организацию...",$this->createUrl('organization/addNew'),array(
+	        'onclick'=>'$("#orgDialog").dialog("open"); return false;',
+	        'update'=>'#orgDialog'
+	        ),array('id'=>'showOrgDialog'));?>
+	    <div id="orgDialog"></div>
+	    </div>
+		<?php // echo CHtml::link("Добавить организацию...", array("organization/create")); ?>
 		<?php echo $form->error($model,'organization_id'); ?>
 	</div>
 
@@ -244,8 +291,10 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 
 	<div class="row" id="location" <?php //if($model->isNewRecord) echo 'style="display: none;"' ?> >
 		<?php echo $form->labelEx($model,'location_id'); ?>
-		<?php echo $form->dropDownList($model, 'location_id', CHtml::listData(Location::model()->findAll(), 'id', 'address'), array('empty'=>'- сначала выберите адрес -')); ?>
+		<?php echo $form->dropDownList($model, 'location_id', CHtml::listData(Location::model()->findAll(), 'id', 'address'), array('empty'=>'- сначала выберите организацию -')); ?>
+		<a href="#&org_id=" id="new_location" style="display: none;">Добавить адрес...</a>
 		<?php echo $form->error($model,'location_id'); ?>
+		<?php  ?>
 	</div>
 
 	<div class="row buttons">

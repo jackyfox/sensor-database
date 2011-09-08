@@ -100,7 +100,7 @@ class LocationController extends Controller
 		{
 			$model->attributes=$_POST['Location'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('organization/view','id'=>$model->organization->id));
 		}
 
 		$this->render('update',array(
