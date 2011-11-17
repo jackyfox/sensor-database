@@ -57,7 +57,9 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 				cache: false,
 				data: "GasAlarm[organization_id])='.$model->organization_id.'",
 				success: function(html){
+					// Заполняем список размещений полученными данными
 					$("#GasAlarm_location_id").html(html);
+					// Выбираем в списке адрес, соотвествующий данному ГС
 					$("#GasAlarm_location_id option:selected").each(function(){
 						this.selected=false;
 					});
@@ -72,7 +74,23 @@ Yii::app()->clientScript->registerScript('interval_end_toggle', '
 		$("#new_location").show();
 		
 		
-	',CClientScript::POS_READY);  
+	',CClientScript::POS_READY);
+?>
+
+<?php 
+	/**
+     * В случае ошибок валидации обновляем список размещений,
+     * если была выбрана организация
+     */
+    if ($model->getErrors())
+	    Yii::app()->clientScript->registerScript('not_valid','
+	    	var org_id = $("#GasAlarm_organization_id option:selected").val();
+	    	if (org_id)
+	    	{
+	    		alert("Ошибки валидации! Организация вырана, id: "+org_id);
+	    	}
+	    	',CClientScript::POS_READY); 
+
 ?>
 
 <?php
