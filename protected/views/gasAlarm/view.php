@@ -33,7 +33,7 @@ $this->menu=array(
 		'location.address',
 	),
 )); ?>
-
+<!-- 
 <h2>Опробования</h2>
 <?php if ($model->testCount == 0): ?>
 <h4>Ни одного оробования данного датчика не проводилось</h4>
@@ -51,8 +51,8 @@ $this->menu=array(
 		'calibrations' => $model->calibrations,
 	)); ?>
 <?php endif; ?>
-
-<h2>Сервисное обслуживание</h2>
+ -->
+<h2>Ремонт</h2>
 <?php if ($model->maintenanceCount == 0): ?>
 <h4>Сервисные обслуживания не проводились для данного датчика</h4>
 <?php else: ?>
@@ -62,5 +62,18 @@ $this->menu=array(
 <?php endif; ?>
 <span class="add-new-data"><?php echo CHtml::link("Добавить данные о новом сервисном обслуживании...", array(
     			'maintenance/create',
+    			'ga_id'=>$model->id,
+    		)); ?></span>
+    		
+<h2>Поверка</h2>
+<?php if ($model->checkCount == 0): ?>
+<h4>Данный датчик до сих пор не поверен</h4>
+<?php else: ?>
+	<?php $this->renderPartial('_checks', array(
+		'checks' => $model->checks,
+	)); ?>
+<?php endif; ?>
+<span class="add-new-data"><?php echo CHtml::link("Добавить данные о новой поверке...", array(
+    			'check/create',
     			'ga_id'=>$model->id,
     		)); ?></span>

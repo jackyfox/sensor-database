@@ -18,6 +18,20 @@ class Check extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Check the static model class
 	 */
+	
+	/**
+	 * Корректируем дату для занесения в БД
+	 */
+	public function beforeSave()
+	{
+		/**
+		 * Преобразует строку вида «15.09.2011»  к формату БД «2011-09-15»
+		 */
+		$this->date = date('Y-m-d', strtotime($this->date));
+		
+		return parent::beforeSave();
+	}
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -43,7 +57,7 @@ class Check extends CActiveRecord
 			array('check_result_id, gas_alarm_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, date, check_result_id, gas_alarm_id', 'safe', 'on'=>'search'),
+			array('factory_number, id, date, check_result_id, gas_alarm_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,8 +81,9 @@ class Check extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'date' => 'Дата',
-			'check_result_id' => 'Результат поверки',
+			'check_result_id' => 'Поверка пройдена',
 			'gas_alarm_id' => 'Газосигнализатор',
+			'factory_number'=>'Зав. №',
 		);
 	}
 
@@ -83,13 +98,39 @@ class Check extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('date',$this->date,true);
 		$criteria->compare('check_result_id',$this->check_result_id);
 		$criteria->compare('gas_alarm_id',$this->gas_alarm_id);
 
+		$criteria->with = array('gasAlarm');
+		
+		$sort = new CSort();
+		$sort->defaultOrder = 'date DESC';
+		$sort->attributes = array(
+			'date',
+		    'factory_number'=>array(
+				'asc'=>'gasAlarm.factory_number',
+			    'desc'=>'gasAlarm.factory_number DESC',
+			),
+		    'check_result_id',
+		);
+
 		return new CActiveDataProvider(get_class($this), array(
+			'pagination'=>array(
+				// Получаем длину страницы из параметров польозвателя 
+				'pageSize'=> Yii::app()->user->getState('pageSize',
+				// Стандартное значение defaultPageSize
+				// задано ранее в main.php, в секции params
+					Yii::app()->params['defaultPageSize']),
+			),
 			'criteria'=>$criteria,
+			'sort' => $sort,
 		));
+	}
+	
+	public function getCheckResult()
+	{
+		$check_res = $this->check_result_id ? "Да" : "Нет";
+		return $check_res;
 	}
 }

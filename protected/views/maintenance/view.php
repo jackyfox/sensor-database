@@ -1,11 +1,11 @@
 <?php
 $this->breadcrumbs=array(
-	'Сервисное обслуживание'=>array('index'),
+	'Ремонт'=>array('index'),
 	'от '.date('d.m.Y', strtotime($model->date)),
 );
 
 $this->menu=array(
-	array('label'=>'Все сервисные работы', 'url'=>array('index')),
+	array('label'=>'Все ремонтные работы', 'url'=>array('index')),
 	array('label'=>'Изменить', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Точно удалить?')),
 	array('label'=>'Управление', 'url'=>array('admin')),

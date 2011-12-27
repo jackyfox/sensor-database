@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Сервисное обслуживание'=>array('index'),
+	'Ремонт'=>array('index'),
 	'от '.date('d.m.Y', strtotime($model->date))=>array('view','id'=>$model->id),
 	'Изменить',
 );
 
 $this->menu=array(
-	array('label'=>'Все сервисные работы', 'url'=>array('index')),
+	array('label'=>'Все ремонтные работы', 'url'=>array('index')),
 	array('label'=>'Подробно', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Управление', 'url'=>array('admin')),
 );

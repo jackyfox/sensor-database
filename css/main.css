@@ -260,3 +260,8 @@ span.add-new-data
     padding-left: 18px;	
     background: transparent url("../images/plus.png") no-repeat;
 }
+
+div#content h2
+{
+    margin-top: 1em;
+}

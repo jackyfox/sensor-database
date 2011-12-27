@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Сервисное обслуживание',
+	'Ремонт',
 );
 
 $this->menu=array(
@@ -16,7 +16,7 @@ EOD
 ,CClientScript::POS_READY);
 ?>
 
-<h1>Сервисное обслуживание</h1>
+<h1>Ремонт</h1>
 
 <?php /* $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

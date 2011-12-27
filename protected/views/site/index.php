@@ -16,9 +16,9 @@
 	echo date('G:i', $last_login_time);
 ?>.
 <?php else: ?>
-<h1>Добро пожалость в базу газосигнализаторов</h1>
+<h1>Добро пожаловать в базу газосигнализаторов</h1>
 <p>Для обновления базы следует залогиниться. <?php echo CHtml::link('Вход', array('site/login'));?></p>
 <?php endif; ?>
 <div>
-	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?> | <?php echo CHtml::link('Сервисное обслуживание', array('/maintenance')); ?></p>
+	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?> | <?php echo CHtml::link('Ремонт', array('/maintenance')); ?> | <?php echo CHtml::link('Поверка', array('/check')); ?></p>
 </div>
