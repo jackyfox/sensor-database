@@ -196,6 +196,7 @@ class GasAlarm extends CActiveRecord
 		$criteria->compare('factory_number',$this->factory_number,true);
 		$criteria->compare('location_id',$this->location_id);
 		$criteria->compare('organization_id',$this->organization_id);
+		$criteria->compare('gas_type_id',$this->gas_type_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'pagination'=>array(

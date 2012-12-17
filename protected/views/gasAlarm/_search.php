@@ -37,6 +37,11 @@ $('input[name=reset-button]').click(function(){
 		<?php echo $form->label($model,'location_id'); ?>
 		<?php echo $form->dropDownList($model, 'location_id', CHtml::listData(Location::model()->findAll(), 'id', 'address'), array('empty'=>'- поиск по адресу -')); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->label($model,'gas_type_id'); ?>
+		<?php echo $form->dropDownList($model, 'gas_type_id', CHtml::listData(GasType::model()->findAll(), 'id', 'type'), array('empty'=>'- поиск по газу -')); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Поиск'); ?>
