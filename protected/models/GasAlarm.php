@@ -293,15 +293,10 @@ class GasAlarm extends CActiveRecord
 		else 
 		{
 			$code_name .= $this->supplyVoltage->voltage;
-			$code_name .= "-".$this->getGasSensorTypeText();
-			if ($this->temp_sensor == 1 || $this->lcd == 1)
-			{
-				$code_name .= ($this->temp_sensor == 1) ? "Т" : "";
-				$code_name .= ($this->lcd == 1) ? "И" : "";
-				$code_name .= "-";
-			}			
-			else 
-				$code_name .= "О-";
+			$code_name .= "-".$this->getGasSensorTypeText()."-";
+			$code_name .= ($this->temp_sensor == 1) ? "Т" : "О";
+			$code_name .= ($this->lcd == 1) ? "И" : "О";
+			$code_name .= "-";			
 			$code_name .= ($this->protection_corps == 1) ? "53" : "20";
 		}
 		
