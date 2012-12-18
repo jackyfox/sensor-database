@@ -73,7 +73,7 @@ class CheckController extends Controller
 		{
 			$model->attributes=$_POST['Check'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
 		}
 
 		$this->render('create',array(
