@@ -7,7 +7,11 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Список всех поверок', 'url'=>array('index')),
 	array('label'=>'Изменить', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Удалить', 
+		  'url'=>'#', 
+		  'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),
+							   'params'=>array('returnUrl'=>$this->createUrl('gasAlarm/view', array('id'=>$model->gasAlarm->id))),
+							   'confirm'=>'Точно удалить?')),
 	array('label'=>'Управление', 'url'=>array('admin')),
 );
 ?>
