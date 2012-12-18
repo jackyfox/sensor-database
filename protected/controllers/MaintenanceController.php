@@ -103,7 +103,7 @@ class MaintenanceController extends Controller
 			$model->attributes=$_POST['Maintenance'];
 			if($model->save())
 			{
-				Yii::app()->user->setFlash('success',"Дата ремонта изменена");
+				Yii::app()->user->setFlash('success',"Информация о ремонте изменена");
 				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
 			}
 		}

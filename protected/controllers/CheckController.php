@@ -103,7 +103,7 @@ class CheckController extends Controller
 			$model->attributes=$_POST['Check'];
 			if($model->save())
 			{
-				Yii::app()->user->setFlash('success',"Дата поверки изменена");
+				Yii::app()->user->setFlash('success',"Информация о поверке изменена");
 				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
 			}
 				
