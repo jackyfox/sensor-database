@@ -73,7 +73,10 @@ class CheckController extends Controller
 		{
 			$model->attributes=$_POST['Check'];
 			if($model->save())
+			{
+				Yii::app()->user->setFlash('success',"Добавлена поверка от ".date('d.m.Y', strtotime($model->date)));
 				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -99,7 +102,11 @@ class CheckController extends Controller
 		{
 			$model->attributes=$_POST['Check'];
 			if($model->save())
+			{
+				Yii::app()->user->setFlash('success',"Дата поверки изменена");
 				$this->redirect(array('gasAlarm/view','id'=>$model->gas_alarm_id));
+			}
+				
 		}
 
 		$this->render('update',array(
@@ -117,6 +124,7 @@ class CheckController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
+			Yii::app()->user->setFlash('success',"Информация о поверке от ".date('d.m.Y', strtotime($this->loadModel($id)->date))." удалена");
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

@@ -11,9 +11,21 @@ $this->menu=array(
 	array('label'=>'Удалить', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Точно удалить?')),
 	array('label'=>'Управление', 'url'=>array('admin')),
 );
+
+Yii::app()->clientScript->registerScript(
+		'hideFlash',
+		'$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");',
+		CClientScript::POS_READY
+);
 ?>
 
 <h1>Подробно о <?php echo $model->codeName; ?></h1>
+
+<?php if(Yii::app()->user->hasFlash('success')):?>
+    <div class="flash-success">
+        <?php echo Yii::app()->user->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
