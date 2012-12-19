@@ -10,7 +10,7 @@
 	)); ?>, (<?php if($location->gaCount) echo CHtml::link(
 			$location->gaCount, 
 			$this->createUrl("gasAlarm/index", array('GasAlarm[location_id]'=>$location->id))); 
-				   else echo "По этому адресу нет ни одного газосигнализатора"; ?>)</li>
+				   else echo "По этому адресу нет газосигнализаторов"; ?>)</li>
 <?php endforeach; ?>
 </ul>
 </div><!-- locations_table -->
