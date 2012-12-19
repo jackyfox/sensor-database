@@ -143,7 +143,7 @@ class GasAlarm extends CActiveRecord
 			'controlSignalsMethod' => array(self::BELONGS_TO, 'ControlSignalsMethod', 'control_signals_method_id'),
 			'gasAlarmType' => array(self::BELONGS_TO, 'GasAlarmType', 'gas_alarm_type_id'),
 			'gasType' => array(self::BELONGS_TO, 'GasType', 'gas_type_id'),
-			'location' => array(self::BELONGS_TO, 'Location', 'location_id'),
+			'location' => array(self::BELONGS_TO, 'Location', 'location_id', 'order'=>'address ASC'),
 			'organization' => array(self::BELONGS_TO, 'Organization', 'organization_id'),
 			'supplyVoltage' => array(self::BELONGS_TO, 'SupplyVoltage', 'supply_voltage_id'),
 			'maintenances' => array(self::HAS_MANY, 'Maintenance', 'gas_alarm_id'),

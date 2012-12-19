@@ -258,9 +258,14 @@ class GasAlarmController extends Controller
 	 */
 	public function actionDloc()
 	{
-	    $data=Location::model()->findAll('organization_id=:parent_id', 
-	                  array(':parent_id'=>(int) $_POST['GasAlarm']['organization_id']));
-	 
+		$parent_id = (int) $_POST['GasAlarm']['organization_id'];
+		
+		$criteria = new CDbCriteria();
+		$criteria->order = 'address ASC';
+		$criteria->condition = "organization_id = $parent_id";
+		
+		$data=Location::model()->findAll($criteria);
+	    
 	    $data=CHtml::listData($data,'id','address');
 	    foreach($data as $value=>$name)
 	    {
