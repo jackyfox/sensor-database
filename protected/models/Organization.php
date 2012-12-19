@@ -58,7 +58,7 @@ class Organization extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'gasAlarms' => array(self::HAS_MANY, 'GasAlarm', 'organization_id'),
-			'locations' => array(self::HAS_MANY, 'Location', 'organization_id'),
+			'locations' => array(self::HAS_MANY, 'Location', 'organization_id', 'order'=>'address ASC'),
 			'locCount' => array(self::STAT, 'Location', 'organization_id'),
 		);
 	}

@@ -58,6 +58,7 @@ class Location extends CActiveRecord
 		return array(
 			'gasAlarms' => array(self::HAS_MANY, 'GasAlarm', 'location_id'),
 			'organization' => array(self::BELONGS_TO, 'Organization', 'organization_id'),
+			'gaCount' => array(self::STAT, 'GasAlarm', 'location_id'),
 		);
 	}
 
@@ -87,7 +88,7 @@ class Location extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('address',$this->address,true);
 		$criteria->compare('organization_id',$this->organization_id);
-
+		
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
