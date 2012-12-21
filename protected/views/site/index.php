@@ -52,3 +52,18 @@
 	?>
 	<p>В базе учтено <?php echo CHtml::link($gaCount." ".$gaTag, array('/gasAlarm'));  ?>, принадлежащих <?php echo CHtml::link($orgCount." ".$orgTag, array('/organization')); ?> и размещенных по <?php echo $locCount." ".$locTag; ?></p>
 </div>
+
+<!-- Инициализация карты -->
+<?php 
+$adress = "Решетникова, 15";
+$key = "";
+$adress1 = urlencode($adress);
+$url="http://geocode-maps.yandex.ru/1.x/?geocode=$adress1";
+$content=file_get_contents($url);
+preg_match('/<pos>(.*?)<\/pos>/',$content,$point);
+$coordinaty=str_replace(' ',', ',trim(strip_tags($point[1])));
+echo $address." - ".$coordinaty;
+?>
+
+<!-- Область показа карты -->
+<div id="map" style="width: 600px; height: 400px"></div>
