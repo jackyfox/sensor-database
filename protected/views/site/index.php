@@ -20,5 +20,35 @@
 <p>Для обновления базы следует залогиниться. <?php echo CHtml::link('Вход', array('site/login'));?></p>
 <?php endif; ?>
 <div>
-	<p><?php echo CHtml::link('Список газосигнализаторов', array('/gasAlarm')); ?> | <?php echo CHtml::link('Организации', array('/organization')); ?> | <?php echo CHtml::link('Ремонт', array('/maintenance')); ?> | <?php echo CHtml::link('Поверка', array('/check')); ?></p>
+	<?php
+		// Считаем количество газосигнализаторов в базе 
+		$gaCount = GasAlarm::model()->count();
+		// Побираем верный падеж для слова «газосигнализаторы» относительно вычисленного значения
+		switch ($gaCount % 10 )
+		{
+			case 1: $gaTag = "газосигнализатор"; break;
+			case 2;
+			case 3;
+			case 4;
+				$gaTag = "газосигнализатора"; break;
+			default: $gaTag = "газосигнализаторов";
+		}
+		// Считаем количество организаций в базе
+		$orgCount = Organization::model()->count();
+		// Подбираем падеж
+		switch ($orgCount % 10)
+		{
+			case 1: $orgTag = "организации"; break;
+			default: $orgTag = "организациям";
+		}
+		// Считаем количество адресов
+		$locCount = Location::model()->count();
+		// Подбираем падеж
+		switch ($locCount % 10)
+		{
+			case 1: $locTag = "адресу"; break;
+			default: $locTag = "адресам";
+		}
+	?>
+	<p>В базе учтено <?php echo CHtml::link($gaCount." ".$gaTag, array('/gasAlarm'));  ?>, принадлежащих <?php echo CHtml::link($orgCount." ".$orgTag, array('/organization')); ?> и размещенных по <?php echo $locCount." ".$locTag; ?></p>
 </div>

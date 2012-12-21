@@ -60,6 +60,7 @@ class Organization extends CActiveRecord
 			'gasAlarms' => array(self::HAS_MANY, 'GasAlarm', 'organization_id'),
 			'locations' => array(self::HAS_MANY, 'Location', 'organization_id', 'order'=>'address ASC'),
 			'locCount' => array(self::STAT, 'Location', 'organization_id'),
+			'gaCount' => array(self::STAT, 'GasAlarm', 'organization_id'),
 		);
 	}
 

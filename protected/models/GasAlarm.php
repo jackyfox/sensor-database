@@ -152,7 +152,6 @@ class GasAlarm extends CActiveRecord
 			'checkCount' => array(self::STAT, 'Check', 'gas_alarm_id'),
 			'calibrationCount' => array(self::STAT, 'Calibration', 'gas_alarm_id'),
 			'maintenanceCount' => array(self::STAT, 'Maintenance', 'gas_alarm_id'),
-			'checkCount' => array(self::STAT, 'Check', 'gas_alarm_id'),
 		);
 	}
 
