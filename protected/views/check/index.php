@@ -30,7 +30,6 @@ EOD
 	'id'=>'checks-grid',
 	'dataProvider'=>$model->search(),
 	'cssFile' => Yii::app()->baseUrl . '/css/gridView/gridView.css',
-	//'filter'=>$model,
 	'summaryText'=>'Показано с {start} по {end} из {count}. Показывать по ' .
         CHtml::dropDownList(
             'pageSize',
@@ -42,7 +41,8 @@ EOD
         array(
         	'name'=>'date',
         	'type'=>'raw',
-        	'value'=>'CHtml::link(date("d.m.Y", strtotime($data->date)), array("check/view", "id"=>$data->id))',
+        	'value'=>'CHtml::link(date("d.m.Y", strtotime($data->date)), 
+        		array("check/index", "Check[date]"=>$data->date))',
 		),
 		array(
 			'class' => 'CLinkColumn',
@@ -50,7 +50,6 @@ EOD
 			'labelExpression' => '$data->gasAlarm->codeName',
 			'urlExpression' => 'Yii::app()->createUrl("gasAlarm/view",array("id"=>$data->gasAlarm->id))',
 			'headerHtmlOptions' => array(
-				'style' => 'width: 120px;',
 				'title' => 'Перейти к ГС',
 			),
 		),
@@ -63,8 +62,8 @@ EOD
 			),
 		),
 		array(
-			'name'  => 'check_result_id',
-			'value' => '$data->checkResult',
+			'header'=> 'Адрес',
+			'value' => '$data->gasAlarm->location->address',
 		),
 	),
 )); ?>

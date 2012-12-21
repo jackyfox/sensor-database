@@ -69,7 +69,8 @@ class Check extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'gasAlarm' => array(self::BELONGS_TO, 'GasAlarm', 'gas_alarm_id'),
+			'gasAlarm' => array(self::BELONGS_TO, 'GasAlarm', 'gas_alarm_id',
+								'order'=>'factory_number ASC'),
 		);
 	}
 
